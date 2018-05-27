@@ -1,5 +1,6 @@
 %{
 	#include "token.h"
+	#include <stdlib.h>
 	extern int yylval;
 %}
 
@@ -15,24 +16,24 @@ double ([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?
 other .
 
 %%
-{int} { return INT;}
-{double} { return DOUBLE; }
+{int} { yylval = atoi(yytext); return INT; }
+{double} { yylval = atoi(yytext); return DOUBLE; }
 {digit_first} { return ERROR; } 
 {under_score} { return ERROR; }
 {id} { return ID; }
-\= { return ASSIGN; }
-\== { return RELOP; }
-\!= { return RELOP; }
-\< { return RELOP; } 
-\> { return RELOP; }
-\<= { return RELOP; }
-\>= { return RELOP; }
+\= { yylval = ASSIGN; return ASSIGN; }
+\== { yylval = EQ; return RELOP; }
+\!= { yylval = NE; return RELOP; }
+\< { yylval = LT; return RELOP; } 
+\> { yylval = GT; return RELOP; }
+\<= { yylval = LE; return RELOP; }
+\>= { yylval = GE; return RELOP; }
 \( { return LPAREN; }
 \) { return RPAREN; }
-\+ { return PLUS; }
-\- { return MINUS; }
-\* { return MULT; }
-\/ { return DIV; }
+\+ { yylval = PLUS; return ARTHOP; }
+\- { yylval = MINUS; return ARTHOP; }
+\* { yylval = MULT; return ARTHOP; }
+\/ { yylval = DIV; return ARTHOP; }
 {ws} {/* no action and no return */}
 {other} { return ERROR; }
 %%

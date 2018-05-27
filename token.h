@@ -6,25 +6,27 @@
 #define MINUS 2
 #define DIV 3 
 #define MULT 4
+#define ARTHOP 5
 
 // Assignment
-#define ASSIGN 5
+#define ASSIGN 6
 
-// Comparison operators
-#define LT 6 // <
-#define LE 7 // <=
-#define GT 8 // >
-#define GE 9 // >=
-#define EQ 10 // == 
-#define NE 11 // !=
+// Relation operators
+#define LT 7 // <
+#define LE 8 // <=
+#define GT 9 // >
+#define GE 10 // >=
+#define EQ 11 // == 
+#define NE 12 // !=
+#define RELOP 13
 
 
 // Identifiers, Integer, Float 
-#define ID 12
-#define DOUBLE 13 
-#define INT 14
+#define ID 14
+#define DOUBLE 15 
+#define INT 16
 
 // Error case
-#define ERROR 15
+#define ERROR 17
 
 #endif
