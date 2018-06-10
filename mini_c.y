@@ -4,7 +4,7 @@
 	int yylex();
 %}
 
-%token NUMBER 
+%token NUMBER ENTER
 
 %%
 
@@ -16,8 +16,10 @@ stmt : expr
 	 ;
 
 expr : expr '+' expr		{ $$ = $1 + $3; } 
-	 | expr '-' expr		{ $$ = $1 + $3; }
+	 | expr '-' expr		{ $$ = $1 - $3; }
+	 | expr '*' expr		{ $$ = $1 * $3; }
 	 | NUMBER
+	 | ENTER				{ YYACCEPT; }
 	 ;
 
 %%

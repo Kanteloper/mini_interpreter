@@ -752,18 +752,18 @@ YY_RULE_SETUP
 case 2:
 YY_RULE_SETUP
 #line 9 "mini_c.l"
-;									/* ignore whitespace */
+;											/* ignore whitespace */
 	YY_BREAK
 case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
 #line 10 "mini_c.l"
-{ return *yytext; }
+{ return ENTER; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
 #line 11 "mini_c.l"
-return yytext[0];
+return yytext[0];							/* pass error handling to parser*/ 
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
