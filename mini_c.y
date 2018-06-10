@@ -18,6 +18,16 @@ stmt : expr
 expr : expr '+' expr		{ $$ = $1 + $3; } 
 	 | expr '-' expr		{ $$ = $1 - $3; }
 	 | expr '*' expr		{ $$ = $1 * $3; }
+	 | expr '/' expr		
+		{ 
+			if($3 == 0)
+			{
+				yyerror("syntax error : devide by zero");
+				YYACCEPT;
+			}
+			else
+				$$ = $1 / $3; 
+		}
 	 | NUMBER
 	 | ENTER				{ YYACCEPT; }
 	 ;
