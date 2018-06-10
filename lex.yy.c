@@ -756,9 +756,11 @@ YY_RULE_SETUP
 	YY_BREAK
 case 3:
 /* rule 3 can match eol */
-#line 11 "mini_c.l"
+YY_RULE_SETUP
+#line 10 "mini_c.l"
+{ return *yytext; }
+	YY_BREAK
 case 4:
-/* rule 4 can match eol */
 YY_RULE_SETUP
 #line 11 "mini_c.l"
 return yytext[0];
@@ -768,7 +770,7 @@ YY_RULE_SETUP
 #line 12 "mini_c.l"
 ECHO;
 	YY_BREAK
-#line 772 "lex.yy.c"
+#line 774 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
