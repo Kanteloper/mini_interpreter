@@ -22,12 +22,14 @@ expr : expr '+' expr		{ $$ = $1 + $3; }
 		{ 
 			if($3 == 0)
 			{
-				yyerror("syntax error : devide by zero");
+				yyerror("syntax error : divide by zero");
 				YYACCEPT;
 			}
 			else
 				$$ = $1 / $3; 
 		}
+	 | '-' expr				{ $$ = -$2; }
+	 | '(' expr ')'			{ $$ = $2; }
 	 | NUMBER
 	 | ENTER				{ YYACCEPT; }
 	 ;
