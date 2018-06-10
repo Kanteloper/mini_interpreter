@@ -11,11 +11,12 @@
 
 %%
 
-line : stmt					{ printf("%d\n", $1); YYACCEPT; }
+line : stmt ';' 			{ printf("%d\n", $1); YYACCEPT; }
 	 |
 	 ;
 
-stmt : expr 			 
+stmt : expr  			 
+	 | stmt expr            { $$ = $2; }
 	 ;
 
 expr : expr '+' expr		{ $$ = $1 + $3; } 
@@ -26,7 +27,6 @@ expr : expr '+' expr		{ $$ = $1 + $3; }
 			if($3 == 0)
 			{
 				yyerror("syntax error : divide by zero");
-				YYACCEPT;
 			}
 			else
 				$$ = $1 / $3; 
@@ -34,7 +34,7 @@ expr : expr '+' expr		{ $$ = $1 + $3; }
 	 | '-' expr %prec UMINUS	{ $$ = -$2; }
 	 | '(' expr ')'				{ $$ = $2; }
 	 | NUMBER
-	 | ENTER					{ YYACCEPT; }
+	 | ENTER					{ }
 	 ;
 
 %%
@@ -42,7 +42,7 @@ expr : expr '+' expr		{ $$ = $1 + $3; }
 int yyerror(char* msg)
 {
 	fprintf(stderr, "%s\n", msg);
-	return -1;
+	return 0;
 }
 
 int main() {
