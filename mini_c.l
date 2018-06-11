@@ -7,6 +7,6 @@
 
 [0-9]+		{ yylval = atoi(yytext); return NUMBER; }	/* integers */
 [ \t]		;											/* ignore whitespace */
-\n			{ return *yytext; }
+[+\n]			{ return *yytext; }
 .			return yytext[0];							/* pass error handling to parser*/ 
 %%
