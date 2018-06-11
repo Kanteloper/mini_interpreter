@@ -758,7 +758,7 @@ case 3:
 /* rule 3 can match eol */
 YY_RULE_SETUP
 #line 10 "mini_c.l"
-{ return ENTER; }
+{ return *yytext; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP

@@ -4,19 +4,21 @@
 	int yylex();
 %}
 
-%token NUMBER ENTER
+%token NUMBER 
 %left '-' '+'
 %left '*' '/'
 %nonassoc UMINUS
 
 %%
 
-line : stmt ';' 			{ printf("%d\n", $1); YYACCEPT; }
-	 |
-	 ;
+line : stmt ';' '\n'		 		{ printf("%d\n", $1); YYACCEPT; }
+	 | line stmt					{ $$ = $2; printf(">"); }
+	 | stmt
+	 | '\n'							{ printf("-?"); YYACCEPT; }
+	 ; 							
 
-stmt : expr  			 
-	 | stmt expr            { $$ = $2; }
+stmt : stmt expr '\n' 			{ $$ = $2; printf(">"); } 
+	 | expr
 	 ;
 
 expr : expr '+' expr		{ $$ = $1 + $3; } 
@@ -27,6 +29,7 @@ expr : expr '+' expr		{ $$ = $1 + $3; }
 			if($3 == 0)
 			{
 				yyerror("syntax error : divide by zero");
+				YYACCEPT;
 			}
 			else
 				$$ = $1 / $3; 
@@ -34,7 +37,7 @@ expr : expr '+' expr		{ $$ = $1 + $3; }
 	 | '-' expr %prec UMINUS	{ $$ = -$2; }
 	 | '(' expr ')'				{ $$ = $2; }
 	 | NUMBER
-	 | ENTER					{ }
+	 |
 	 ;
 
 %%
@@ -42,15 +45,15 @@ expr : expr '+' expr		{ $$ = $1 + $3; }
 int yyerror(char* msg)
 {
 	fprintf(stderr, "%s\n", msg);
-	return 0;
+	return -1;
 }
 
 int main() {
 
 	// feof(any stream) : tests the end-of-file indicator for the stream
 	//			pointed to by stream, returning nonzero if it is set.
+	printf("-?");
 	while(!feof(stdin)) {
-		printf("-?");
 		yyparse();
 	}
 	return 0;
