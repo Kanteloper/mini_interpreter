@@ -62,20 +62,66 @@ assign_expr :
 equal_expr : 
 		   equal_expr EQ rel_expr				{ debug(EQ!!); }
 		   | equal_expr NQ rel_expr				{ debug(NQ!!); }
-		   | rel_expr
+		   | rel_expr							{ debug(NO EQ); }
 		   ;
+
+
 
 rel_expr : 
 		 rel_expr '>' addsub_expr				{ debug(GT!!); }
 		 rel_expr '<' addsub_expr				{ debug(LT!!); }
 		 rel_expr GQ addsub_expr				{ debug(GQ!!); }
 		 rel_expr LQ addsub_expr				{ debug(LQ!!); }
-		 | addsub_expr
+		 | addsub_expr							{ debug(NO RELOP); }
 		 ;
 
+
+
 addsub_expr :
-			VAR
+			addsub_expr '+' muldiv_expr			{ debug(PLUS!!); }
+			|addsub_expr '-' muldiv_expr		{ debug(MINUS!!); }
+			| muldiv_expr						{ debug(NO ADD SUB); }
 			;
+
+
+
+muldiv_expr :
+			muldiv_expr '*' cast				{ debug(MULT!!); }
+			| muldiv_expr '/' cast				{ debug(DIV!!); }
+			| cast								{ debug(NO MULT DIV); }
+			;
+
+
+
+cast :
+	 unary_expr									{ puts("cast <== unary"); }
+	 | primary									{ debug(NO UNARY); }
+	 ;
+
+
+
+
+unary_op : 
+		 '-'									
+		 ;
+
+
+
+unary_expr :
+		   unary_op cast						{ puts("unary <== unary_op cast"); }
+		   ;
+
+primary :
+		VAR
+		;
+
+
+
+
+
+
+
+		   
 
 
 
