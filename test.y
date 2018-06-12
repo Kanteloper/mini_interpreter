@@ -1,6 +1,5 @@
 %{
 	#include <stdio.h>
-	#define debug(s)	printf(#s)
 	int yyerror(char* msg);
 	int yylex();
 %}
@@ -9,8 +8,14 @@
 %token EQ NQ
 %token LQ GQ 
 %token IF THEN ELSE END WHILE DEF LOCAL PRINT
+%token INT DOUB
 
 %%
+
+program : stmt_list ';'						{ puts("YYACCEPT"); YYACCEPT;}
+		| '\n'								{ printf("-?"); YYACCEPT;}
+		 
+		 
 
 stmt_list : 
 		  stmt_list stmt					{ puts("stmt_list <== stmt"); }
@@ -122,6 +127,13 @@ primary :
 		| VAR									{ puts("primary <== VAR"); }
 		| NUMBER								{ puts("primary <== NUMBER"); }
 		;
+
+
+
+type :
+	 INT
+	 | DOUB
+	 ;
 
 
 %%

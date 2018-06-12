@@ -58,7 +58,9 @@ extern int yydebug;
     WHILE = 268,
     DEF = 269,
     LOCAL = 270,
-    PRINT = 271
+    PRINT = 271,
+    INT = 272,
+    DOUB = 273
   };
 #endif
 /* Tokens.  */
@@ -76,6 +78,8 @@ extern int yydebug;
 #define DEF 269
 #define LOCAL 270
 #define PRINT 271
+#define INT 272
+#define DOUB 273
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED

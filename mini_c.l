@@ -11,6 +11,9 @@ float ([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?
 
 %%
 
+"int"		{ return INT;}								/* variable type int */
+"double"	{ return DOUB;}								/* variable type double */
+
 "if"		{ return IF; }
 "then"		{ return THEN; }
 "else"		{ return ELSE; }
