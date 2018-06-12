@@ -1,10 +1,20 @@
 %{
 	#include <stdio.h>
+	#include "treeNode.h"
 	int yyerror(char* msg);
 	int yylex();
+	extern char* yytext;
 %}
 
-%token NUMBER VAR
+%union 
+{
+	double dval;
+	int val;
+}
+
+%token <dval> DOUBLE;
+%token <int> INTEGER;
+%token VAR
 %token EQ NQ
 %token LQ GQ 
 %token IF THEN ELSE END WHILE DEF LOCAL PRINT
@@ -13,13 +23,14 @@
 %%
 
 program : stmt_list ';'						{ puts("YYACCEPT"); YYACCEPT;}
-		| '\n'								{ printf("-?"); YYACCEPT;}
+		| '\n'								{ printf("-? "); YYACCEPT;}
+		;
 		 
 		 
 
 stmt_list : 
-		  stmt_list stmt					{ puts("stmt_list <== stmt"); }
-		  | stmt			
+		  stmt_list stmt					{ puts("stmt_list <== stmt_list stmt"); }
+		  | stmt '\n'						{ puts("stmt_list <== stmt"); printf("> "); }			
 		  ;
 
 
@@ -124,16 +135,26 @@ primary :
 		VAR '(' stmt_list ')'					{ puts("primary <== ( stmt list )"); }
 		| VAR '(' ')'							{ puts("primary <== var ()");}
 		| '(' expr_stmt ')'						{ puts("primary <== ( expr )"); }
-		| VAR									{ puts("primary <== VAR"); }
-		| NUMBER								{ puts("primary <== NUMBER"); }
+		| VAR									
+			{ 
+				puts("primary <== VAR"); 
+			}
+		| INTEGER								{ puts("primary <== INTEGER"); }
+		| DOUBLE								
+			{ 
+				puts("primary <== DOUBLE"); 
+				printf("%.2f\n", $1);
+					
+			}
 		;
 
 
 
-type :
-	 INT
-	 | DOUB
-	 ;
+
+type_spec : 
+		  INT 
+		  | DOUB
+		  ;
 
 
 %%

@@ -45,45 +45,58 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    NUMBER = 258,
-    VAR = 259,
-    EQ = 260,
-    NQ = 261,
-    LQ = 262,
-    GQ = 263,
-    IF = 264,
-    THEN = 265,
-    ELSE = 266,
-    END = 267,
-    WHILE = 268,
-    DEF = 269,
-    LOCAL = 270,
-    PRINT = 271,
-    INT = 272,
-    DOUB = 273
+    DOUBLE = 258,
+    INTEGER = 259,
+    VAR = 260,
+    EQ = 261,
+    NQ = 262,
+    LQ = 263,
+    GQ = 264,
+    IF = 265,
+    THEN = 266,
+    ELSE = 267,
+    END = 268,
+    WHILE = 269,
+    DEF = 270,
+    LOCAL = 271,
+    PRINT = 272,
+    INT = 273,
+    DOUB = 274
   };
 #endif
 /* Tokens.  */
-#define NUMBER 258
-#define VAR 259
-#define EQ 260
-#define NQ 261
-#define LQ 262
-#define GQ 263
-#define IF 264
-#define THEN 265
-#define ELSE 266
-#define END 267
-#define WHILE 268
-#define DEF 269
-#define LOCAL 270
-#define PRINT 271
-#define INT 272
-#define DOUB 273
+#define DOUBLE 258
+#define INTEGER 259
+#define VAR 260
+#define EQ 261
+#define NQ 262
+#define LQ 263
+#define GQ 264
+#define IF 265
+#define THEN 266
+#define ELSE 267
+#define END 268
+#define WHILE 269
+#define DEF 270
+#define LOCAL 271
+#define PRINT 272
+#define INT 273
+#define DOUB 274
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
+
+union YYSTYPE
+{
+#line 10 "test.y" /* yacc.c:1909  */
+
+	double dval;
+	int val;
+
+#line 97 "y.tab.h" /* yacc.c:1909  */
+};
+
+typedef union YYSTYPE YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define YYSTYPE_IS_DECLARED 1
 #endif

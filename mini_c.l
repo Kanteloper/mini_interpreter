@@ -1,13 +1,12 @@
 %{
 	#include "y.tab.h"
-	extern int yylval;
 %}
 
 under_score [_]+
 digit_first [0-9]+[a-zA-Z|0-9|_]+
 id [a-zA-Z_][a-zA-Z0-9_]*
 int [0-9]+
-float ([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?
+double ([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?
 
 %%
 
@@ -36,9 +35,12 @@ float ([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?
 "/"			{ return *yytext; }							/* div */
 
 
-{int}		{ yylval = atoi(yytext); return NUMBER; }	/* integers */
-{id}		{ return VAR; }
-[ \t]		;											/* ignore whitespace */
+{int}			{ yylval.val = atoi(yytext); return INTEGER; }	/* integer */
+{double}		{ yylval.dval = atof(yytext); return DOUBLE; }  /* double */
+{digit_first}	  return yytext[0];	
+{under_score}	  return yytext[0];
+{id}			{ return VAR; }
+[ \t]			;											/* ignore whitespace */
 [\n]			{ return *yytext; }
-.			return yytext[0];							/* pass error handling to parser*/ 
+.		   	      return yytext[0];							/* pass error handling to parser*/ 
 %%
