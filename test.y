@@ -60,42 +60,42 @@ assign_expr :
 
 
 equal_expr : 
-		   equal_expr EQ rel_expr				{ debug(EQ!!); }
-		   | equal_expr NQ rel_expr				{ debug(NQ!!); }
-		   | rel_expr							{ debug(NO EQ); }
+		   equal_expr EQ rel_expr				{ puts("equal <== eq == rel");}
+		   | equal_expr NQ rel_expr				{ puts("equal <== eq != rel"); }
+		   | rel_expr							{ puts("equal <== rel"); }
 		   ;
 
 
 
 rel_expr : 
-		 rel_expr '>' addsub_expr				{ debug(GT!!); }
-		 rel_expr '<' addsub_expr				{ debug(LT!!); }
-		 rel_expr GQ addsub_expr				{ debug(GQ!!); }
-		 rel_expr LQ addsub_expr				{ debug(LQ!!); }
-		 | addsub_expr							{ debug(NO RELOP); }
+		 rel_expr '>' addsub_expr				{ puts("rel <== rel > addsub"); }
+		 rel_expr '<' addsub_expr				{ puts("rel <== rel < addsub"); }
+		 rel_expr GQ addsub_expr				{ puts("rel <== rel >= addsub");}
+		 rel_expr LQ addsub_expr				{ puts("rel <== rel <= addsub"); }
+		 | addsub_expr							{ puts("rel <== addsub"); }
 		 ;
 
 
 
 addsub_expr :
-			addsub_expr '+' muldiv_expr			{ debug(PLUS!!); }
-			|addsub_expr '-' muldiv_expr		{ debug(MINUS!!); }
-			| muldiv_expr						{ debug(NO ADD SUB); }
+			addsub_expr '+' muldiv_expr			{ puts("addsub <== addsub + muldiv"); }
+			|addsub_expr '-' muldiv_expr		{ puts("addsub <== addsub - muldiv"); }
+			| muldiv_expr						{ puts("addsub <== muldiv"); }
 			;
 
 
 
 muldiv_expr :
-			muldiv_expr '*' cast				{ debug(MULT!!); }
-			| muldiv_expr '/' cast				{ debug(DIV!!); }
-			| cast								{ debug(NO MULT DIV); }
+			muldiv_expr '*' cast				{ puts("muldiv <== muldiv * cast"); }
+			| muldiv_expr '/' cast				{ puts("muldiv <== muldiv / cast"); }
+			| cast								{ puts("muldiv <== cast"); }
 			;
 
 
 
 cast :
 	 unary_expr									{ puts("cast <== unary"); }
-	 | primary									{ debug(NO UNARY); }
+	 | primary									{ puts("cast <== primary"); }
 	 ;
 
 
@@ -119,8 +119,8 @@ primary :
 		VAR '(' stmt_list ')'					{ puts("primary <== ( stmt list )"); }
 		| VAR '(' ')'							{ puts("primary <== var ()");}
 		| '(' expr_stmt ')'						{ puts("primary <== ( expr )"); }
-		| VAR									{ debug(VAR!!); }
-		| NUMBER								{ debug(NUMBER!!); }
+		| VAR									{ puts("primary <== VAR"); }
+		| NUMBER								{ puts("primary <== NUMBER"); }
 		;
 
 

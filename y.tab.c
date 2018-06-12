@@ -1336,85 +1336,85 @@ yyreduce:
 
   case 14:
 #line 63 "test.y" /* yacc.c:1646  */
-    { debug(EQ!!); }
+    { puts("equal <== eq == rel");}
 #line 1341 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 15:
 #line 64 "test.y" /* yacc.c:1646  */
-    { debug(NQ!!); }
+    { puts("equal <== eq != rel"); }
 #line 1347 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 16:
 #line 65 "test.y" /* yacc.c:1646  */
-    { debug(NO EQ); }
+    { puts("equal <== rel"); }
 #line 1353 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 17:
 #line 71 "test.y" /* yacc.c:1646  */
-    { debug(GT!!); }
+    { puts("rel <== rel > addsub"); }
 #line 1359 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 18:
 #line 72 "test.y" /* yacc.c:1646  */
-    { debug(LT!!); }
+    { puts("rel <== rel < addsub"); }
 #line 1365 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 19:
 #line 73 "test.y" /* yacc.c:1646  */
-    { debug(GQ!!); }
+    { puts("rel <== rel >= addsub");}
 #line 1371 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 20:
 #line 74 "test.y" /* yacc.c:1646  */
-    { debug(LQ!!); }
+    { puts("rel <== rel <= addsub"); }
 #line 1377 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 21:
 #line 75 "test.y" /* yacc.c:1646  */
-    { debug(NO RELOP); }
+    { puts("rel <== addsub"); }
 #line 1383 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 22:
 #line 81 "test.y" /* yacc.c:1646  */
-    { debug(PLUS!!); }
+    { puts("addsub <== addsub + muldiv"); }
 #line 1389 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 23:
 #line 82 "test.y" /* yacc.c:1646  */
-    { debug(MINUS!!); }
+    { puts("addsub <== addsub - muldiv"); }
 #line 1395 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 24:
 #line 83 "test.y" /* yacc.c:1646  */
-    { debug(NO ADD SUB); }
+    { puts("addsub <== muldiv"); }
 #line 1401 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 25:
 #line 89 "test.y" /* yacc.c:1646  */
-    { debug(MULT!!); }
+    { puts("muldiv <== muldiv * cast"); }
 #line 1407 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 26:
 #line 90 "test.y" /* yacc.c:1646  */
-    { debug(DIV!!); }
+    { puts("muldiv <== muldiv / cast"); }
 #line 1413 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 27:
 #line 91 "test.y" /* yacc.c:1646  */
-    { debug(NO MULT DIV); }
+    { puts("muldiv <== cast"); }
 #line 1419 "y.tab.c" /* yacc.c:1646  */
     break;
 
@@ -1426,7 +1426,7 @@ yyreduce:
 
   case 29:
 #line 98 "test.y" /* yacc.c:1646  */
-    { debug(NO UNARY); }
+    { puts("cast <== primary"); }
 #line 1431 "y.tab.c" /* yacc.c:1646  */
     break;
 
@@ -1456,13 +1456,13 @@ yyreduce:
 
   case 35:
 #line 122 "test.y" /* yacc.c:1646  */
-    { debug(VAR!!); }
+    { puts("primary <== VAR"); }
 #line 1461 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 36:
 #line 123 "test.y" /* yacc.c:1646  */
-    { debug(NUMBER!!); }
+    { puts("primary <== NUMBER"); }
 #line 1467 "y.tab.c" /* yacc.c:1646  */
     break;
 
