@@ -21,6 +21,16 @@ float ([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?
 "print"		{ return PRINT; }
 
 "="			{ return *yytext; }							/* assign */
+">"			{ return *yytext; }							/* relop > */
+"<"			{ return *yytext; }							/* relop < */
+"<="		{ return LQ; }								/* relop <= */
+">="		{ return GQ; }								/* relop >= */
+"=="		{ return EQ; }								/* eqlop == */
+"!="		{ return NQ; }								/* eqlop != */
+"+"			{ return *yytext; }							/* plus */
+"-"			{ return *yytext; }							/* minus */
+"*"			{ return *yytext; }							/* multi */
+"/"			{ return *yytext; }							/* div */
 
 
 {int}		{ yylval = atoi(yytext); return NUMBER; }	/* integers */

@@ -47,27 +47,35 @@ extern int yydebug;
   {
     NUMBER = 258,
     VAR = 259,
-    IF = 260,
-    THEN = 261,
-    ELSE = 262,
-    END = 263,
-    WHILE = 264,
-    DEF = 265,
-    LOCAL = 266,
-    PRINT = 267
+    EQ = 260,
+    NQ = 261,
+    LQ = 262,
+    GQ = 263,
+    IF = 264,
+    THEN = 265,
+    ELSE = 266,
+    END = 267,
+    WHILE = 268,
+    DEF = 269,
+    LOCAL = 270,
+    PRINT = 271
   };
 #endif
 /* Tokens.  */
 #define NUMBER 258
 #define VAR 259
-#define IF 260
-#define THEN 261
-#define ELSE 262
-#define END 263
-#define WHILE 264
-#define DEF 265
-#define LOCAL 266
-#define PRINT 267
+#define EQ 260
+#define NQ 261
+#define LQ 262
+#define GQ 263
+#define IF 264
+#define THEN 265
+#define ELSE 266
+#define END 267
+#define WHILE 268
+#define DEF 269
+#define LOCAL 270
+#define PRINT 271
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
