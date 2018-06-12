@@ -107,24 +107,21 @@ unary_op :
 
 
 
+
 unary_expr :
 		   unary_op cast						{ puts("unary <== unary_op cast"); }
 		   ;
 
+
+
+
 primary :
-		VAR
+		VAR '(' stmt_list ')'					{ puts("primary <== ( stmt list )"); }
+		| VAR '(' ')'							{ puts("primary <== var ()");}
+		| '(' expr_stmt ')'						{ puts("primary <== ( expr )"); }
+		| VAR									{ debug(VAR!!); }
+		| NUMBER								{ debug(NUMBER!!); }
 		;
-
-
-
-
-
-
-
-		   
-
-
-
 
 
 %%
