@@ -46,12 +46,28 @@ extern int yydebug;
   enum yytokentype
   {
     NUMBER = 258,
-    UMINUS = 259
+    VAR = 259,
+    IF = 260,
+    THEN = 261,
+    ELSE = 262,
+    END = 263,
+    WHILE = 264,
+    DEF = 265,
+    LOCAL = 266,
+    PRINT = 267
   };
 #endif
 /* Tokens.  */
 #define NUMBER 258
-#define UMINUS 259
+#define VAR 259
+#define IF 260
+#define THEN 261
+#define ELSE 262
+#define END 263
+#define WHILE 264
+#define DEF 265
+#define LOCAL 266
+#define PRINT 267
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
