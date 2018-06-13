@@ -1,5 +1,7 @@
 %{
 	#include "y.tab.h"
+	#include <string.h>
+	void yyerror(char* );
 %}
 
 under_score [_]+
@@ -9,9 +11,6 @@ int [0-9]+
 double ([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?
 
 %%
-
-"int"		{ return INT;}								/* variable type int */
-"double"	{ return DOUB;}								/* variable type double */
 
 "if"		{ return IF; }
 "then"		{ return THEN; }
@@ -35,12 +34,24 @@ double ([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?
 "/"			{ return *yytext; }							/* div */
 
 
-{int}			{ yylval.val = atoi(yytext); return INTEGER; }	/* integer */
+{int}			{ 
+					// only 10 size
+					if(strlen(yytext) < 10)
+					{
+						puts("work");
+					}
+					else{
+						puts("not");
+					}
+					yylval.val = atoi(yytext); 
+					return INTEGER; 
+				
+				}	/* integer */
 {double}		{ yylval.dval = atof(yytext); return DOUBLE; }  /* double */
 {digit_first}	  return yytext[0];	
 {under_score}	  return yytext[0];
 {id}			{ return VAR; }
-[ \t]			;											/* ignore whitespace */
+[ \t]			;													/* ignore whitespace */
 [\n]			{ return *yytext; }
-.		   	      return yytext[0];							/* pass error handling to parser*/ 
+.		   	    yyerror("lexical error : Unknown character"); 		/* lexical error */ 
 %%

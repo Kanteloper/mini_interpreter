@@ -1,8 +1,6 @@
 %{
 	#include <stdio.h>
-
 	#include "treeNode.h"
-
 	int yyerror(char* msg);
 	int yylex();
 	extern char* yytext;
@@ -109,47 +107,14 @@ muldiv_expr :
 
 
 cast :
-	 error unary_expr									{ puts("cast <== unary"); }
-	 | error primary									{ puts("cast <== primary"); }
+	 error primary
+	 | error '-' primary
 	 ;
 
 
 
-
-unary_op : 
-		 '-'									
-		 ;
-
-
-
-
-unary_expr :
-		   unary_op cast						{ puts("unary <== unary_op cast"); }
-		   ;
-
-
-
-
-primary :
-		VAR '(' stmt_list ')'					{ puts("primary <== ( stmt list )"); }
-		| VAR '(' ')'							{ puts("primary <== var ()");}
-		| '(' expr_stmt ')'						{ puts("primary <== ( expr )"); }
-		| VAR									
-			{ 
-				puts("primary <== VAR"); 
-			}
-		| INTEGER								
-			{ 
-				puts("primary <== INTEGER"); 
-				printf("%d\n", INTEGER);
-			}
-		| DOUBLE								
-			{ 
-				puts("primary <== DOUBLE"); 
-				double value = yylval.dval;
-				makeLeaf(typeDB, &value);
-
-			}
+primary : 
+		VAR
 		;
 
 
@@ -169,4 +134,3 @@ int main() {
 	}
 	return 0;
 }
-

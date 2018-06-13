@@ -1,5 +1,8 @@
-#ifdef __TREE_NODE_H
+#ifndef __TREE_NODE_H
 #define __TREE_NODE_H
+
+
+typedef enum { typeINT, typeDB, typeVAR } typeTag;
 
 // node for identifier
 typedef struct _id_node
@@ -19,16 +22,18 @@ typedef struct _doub_node
 	double val; // size of number 10
 } doubNode;
 
-// union for node
-typedef union 
+typedef struct _node_pack
 {
-	idNode idn;
-	intNode intn;
-	doubNode dbn;
-} N;
+	typeTag type; // type of node
+	union // union for node according to type
+	{
+		idNode idn;
+		intNode intn;
+		doubNode dbn;
+	};
+} nodePack;
 
-
-
+nodePack* makeLeaf(typeTag type, void* value);
 
 
 #endif

@@ -1,5 +1,5 @@
-interpreter: lex.yy.c y.tab.c 
-	gcc -o interpreter y.tab.c lex.yy.c -ly -ll 
+interpreter: lex.yy.c y.tab.c treeNode.c  
+	gcc -o interpreter y.tab.c lex.yy.c treeNode.c -ll -ly
 
 lex.yy.c : mini_c.l
 	flex mini_c.l
@@ -11,6 +11,6 @@ table :
 	bison -b y -v test.y
 
 clean : 
-	rm lex.yy.c y.tab.c y.tab.h interpreter
+	rm lex.yy.c y.tab.c y.tab.h interpreter *.o
 
 

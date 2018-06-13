@@ -45,9 +45,9 @@ extern int yydebug;
 # define YYTOKENTYPE
   enum yytokentype
   {
-    DOUBLE = 258,
-    INTEGER = 259,
-    VAR = 260,
+    VAR = 258,
+    DOUBLE = 259,
+    INTEGER = 260,
     EQ = 261,
     NQ = 262,
     LQ = 263,
@@ -59,15 +59,13 @@ extern int yydebug;
     WHILE = 269,
     DEF = 270,
     LOCAL = 271,
-    PRINT = 272,
-    INT = 273,
-    DOUB = 274
+    PRINT = 272
   };
 #endif
 /* Tokens.  */
-#define DOUBLE 258
-#define INTEGER 259
-#define VAR 260
+#define VAR 258
+#define DOUBLE 259
+#define INTEGER 260
 #define EQ 261
 #define NQ 262
 #define LQ 263
@@ -80,20 +78,18 @@ extern int yydebug;
 #define DEF 270
 #define LOCAL 271
 #define PRINT 272
-#define INT 273
-#define DOUB 274
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 
 union YYSTYPE
 {
-#line 10 "test.y" /* yacc.c:1909  */
+#line 12 "test.y" /* yacc.c:1909  */
 
 	double dval;
 	int val;
 
-#line 97 "y.tab.h" /* yacc.c:1909  */
+#line 93 "y.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;
