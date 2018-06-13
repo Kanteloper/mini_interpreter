@@ -27,7 +27,7 @@ nodePack* makeLeaf(typeTag type, void* value)
 			}
 			p->type = type;
 			p->dbn.dval = *(double *)value;
-			break;
+			return p;
 
 		case typeVAR:
 			if((p = malloc(sizeof(nodePack))) == NULL)
@@ -35,6 +35,8 @@ nodePack* makeLeaf(typeTag type, void* value)
 				perror("int Node out of Memory\n");
 				exit(0);
 			}
+			p->type = type;
+			p->idn.index = *(int *)value;
 			break;
 
 		default:
