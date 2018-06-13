@@ -3,6 +3,7 @@
 #include <stdarg.h>
 
 #include "treeNode.h"
+#include "stack.h"
 
 nodePack* makeLeaf(typeTag type, void* value)
 {
@@ -44,7 +45,7 @@ nodePack* makeLeaf(typeTag type, void* value)
 	}
 }
 
-nodePack* makeNode(typeTag type, int num, ...)
+nodePack* makeNode(int opr, int num, ...)
 {
 	va_list ap;
 	nodePack* p;
@@ -56,8 +57,8 @@ nodePack* makeNode(typeTag type, int num, ...)
 		exit(0);
 	}
 
-	p->type = type;
-	p->oprn.type = type;
+	p->type = typeOpr;
+	p->oprn.opr = opr;
 	p->oprn.nops = num;
 	// variable arguments
 	va_start(ap, num);
@@ -68,6 +69,18 @@ nodePack* makeNode(typeTag type, int num, ...)
 	va_end(ap);
 
 	return p;
+}
+
+void execute(nodePack* p)
+{
+	if(!p) return;
+	switch(p->type)
+	{
+		case '+' : 
+			
+			break;
+			
+	}
 }
 
 
