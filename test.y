@@ -32,6 +32,11 @@ program : stmt_list ';' 					{ puts("YYACCEPT"); idx = 0; YYACCEPT;}
 
 stmt_list : 
 		  stmt_list stmt					{ puts("stmt_list <== stmt_list stmt"); }
+		  | stmt_list stmt '\n'				
+			{ 
+				puts("stmt_list <== stmt_list stmt newLine"); printf("> ");
+			}
+		  | stmt '\n'						{ puts("stmt_list <== stmt newLine"); printf("> "); }
 		  | stmt							{ puts("stmt_list <== stmt"); }			
 		  ;
 
