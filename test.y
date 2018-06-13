@@ -5,13 +5,16 @@
 
 	int yyerror(char* msg);
 	int yylex();
+	int idx = 0;
 	extern char* yytext;
+	symNode* symTab[MAX_SYM];
 %}
 
 %union
 {
 	double dval;
 	long val;
+	int idx;
 }
 
 %token VAR DOUBLE INTEGER
@@ -109,8 +112,8 @@ muldiv_expr :
 
 
 cast :
-	 error unary_expr									{ puts("cast <== unary"); }
-	 | error primary									{ puts("cast <== primary"); }
+	  unary_expr									{ puts("cast <== unary"); }
+	 | primary									{ puts("cast <== primary"); }
 	 ;
 
 

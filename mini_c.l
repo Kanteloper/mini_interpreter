@@ -1,11 +1,17 @@
 %{
 	#include "y.tab.h"
+	#include "treeNode.h"
+
 	#include <string.h>
 	#include <stdlib.h>
+
 	void yyerror(char* );
 	size_t num_len = 10;
 	size_t var_len = 16;
-	char* number;
+	char* token;
+
+	extern symNode* symTab[MAX_SYM];
+	extern int idx;
 %}
 
 under_score [_]+
@@ -41,10 +47,10 @@ double ([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?
 {int}			{	/* integer */
 					if(strlen(yytext) > 10) // only 10 size
 					{
-						number = (char*)malloc(sizeof(char) * 11);
-						strncpy(number, &yytext[yyleng - num_len], num_len);
-						yylval.val = atol(number);
-						free(number);
+						token = (char*)malloc(sizeof(char) * 11);
+						strncpy(token, &yytext[yyleng - num_len], num_len);
+						yylval.val = atol(token);
+						free(token);
 					}
 					else 
 					{
@@ -56,10 +62,10 @@ double ([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?
 {double}		{ /* double */
 					if(strlen(yytext) > 10)
 					{
-						number = (char*)malloc(sizeof(char) * 11);
-						strncpy(number, &yytext[yyleng - num_len], num_len);
-						yylval.dval = atof(number);
-						free(number);
+						token = (char*)malloc(sizeof(char) * 11);
+						strncpy(token, &yytext[yyleng - num_len], num_len);
+						yylval.dval = atof(token);
+						free(token);
 					}
 					else
 					{
@@ -70,10 +76,19 @@ double ([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?
 {digit_first}	yyerror("lexical error : Unknown character");  	
 {under_score}	yyerror("lexical error : Unknown character");  
 {id}			{
-					
+					if(strlen(yytext) > 16)
+					{
+						token = (char*)malloc(sizeof(char) * 17);
+						strncpy(token, yytext, var_len);
+					}
+
+					printf("%d\n", idx);
+					idx++;
+
+
 					return VAR; 
 				}
 [ \t]			;													/* ignore whitespace */
-[\n]			{ return *yytext; }
+[;\n]			{ return *yytext; }
 .		   	    yyerror("lexical error : Unknown character"); 		/* lexical error */ 
 %%
