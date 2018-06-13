@@ -144,7 +144,15 @@ muldiv_expr :
 					puts("muldiv <== muldiv / cast");
 					nodePack* s2 = pop(&pstack);
 					nodePack* s1 = pop(&pstack);
-					push(&pstack, makeNode('/', 2, s1, s2));
+					if(s2->dbn.dval == 0.0 || s2->intn.val == 0)
+					{
+						yyerror("divide by zero");
+						YYACCEPT;
+					}
+					else 
+					{
+						push(&pstack, makeNode('/', 2, s1, s2));
+					}
 				}
 			| cast								{ puts("muldiv <== cast"); }
 			;
