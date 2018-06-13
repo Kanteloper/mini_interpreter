@@ -76,16 +76,22 @@ double ([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?
 {digit_first}	yyerror("lexical error : Unknown character");  	
 {under_score}	yyerror("lexical error : Unknown character");  
 {id}			{
+					symTab[idx] = (symNode*)malloc(sizeof(symNode));					
+
 					if(strlen(yytext) > 16)
 					{
-						token = (char*)malloc(sizeof(char) * 17);
-						strncpy(token, yytext, var_len);
+						symTab[idx]->sym = (char*)malloc(sizeof(char) * 17);
+						strncpy(symTab[idx]->sym, yytext, var_len);
+
+					}
+					else
+					{
+						symTab[idx]->sym = malloc(sizeof(char) * (strlen(yytext) + 1));
+						strncpy(symTab[idx]->sym, yytext, strlen(yytext));
 					}
 
-					printf("%d\n", idx);
+					yylval.idx = idx;
 					idx++;
-
-
 					return VAR; 
 				}
 [ \t]			;													/* ignore whitespace */

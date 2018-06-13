@@ -24,7 +24,17 @@
 
 %%
 
-program : stmt_list ';' 					{ puts("YYACCEPT"); idx = 0; YYACCEPT;}
+program : stmt_list ';' 					
+			{ 
+				puts("YYACCEPT"); 
+				
+				for(int i = 0; i < 2; i ++)
+				{
+					printf("%s\n", symTab[i]->sym);
+				}
+				
+				
+				idx = 0; YYACCEPT;}
 		| '\n'								{ printf("-? "); YYACCEPT;}
 		;
 		 
@@ -34,7 +44,8 @@ stmt_list :
 		  stmt_list stmt					{ puts("stmt_list <== stmt_list stmt"); }
 		  | stmt_list stmt '\n'				
 			{ 
-				puts("stmt_list <== stmt_list stmt newLine"); printf("> ");
+				puts("stmt_list <== stmt_list stmt newLine");
+				printf("> ");
 			}
 		  | stmt '\n'						{ puts("stmt_list <== stmt newLine"); printf("> "); }
 		  | stmt							{ puts("stmt_list <== stmt"); }			
@@ -118,7 +129,7 @@ muldiv_expr :
 
 cast :
 	  unary_expr									{ puts("cast <== unary"); }
-	 | primary									{ puts("cast <== primary"); }
+	 | primary										{ puts("cast <== primary"); }
 	 ;
 
 
@@ -145,6 +156,7 @@ primary :
 		| VAR									
 			{ 
 				puts("primary <== VAR"); 
+				
 			}
 		| INTEGER								
 			{ 

@@ -946,41 +946,47 @@ case 24:
 YY_RULE_SETUP
 #line 78 "mini_c.l"
 {
+					symTab[idx] = (symNode*)malloc(sizeof(symNode));					
+
 					if(strlen(yytext) > 16)
 					{
-						token = (char*)malloc(sizeof(char) * 17);
-						strncpy(token, yytext, var_len);
+						symTab[idx]->sym = (char*)malloc(sizeof(char) * 17);
+						strncpy(symTab[idx]->sym, yytext, var_len);
+
+					}
+					else
+					{
+						symTab[idx]->sym = malloc(sizeof(char) * (strlen(yytext) + 1));
+						strncpy(symTab[idx]->sym, yytext, strlen(yytext));
 					}
 
-					printf("%d\n", idx);
+					yylval.idx = idx;
 					idx++;
-
-
 					return VAR; 
 				}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 91 "mini_c.l"
+#line 97 "mini_c.l"
 ;													/* ignore whitespace */
 	YY_BREAK
 case 26:
 /* rule 26 can match eol */
 YY_RULE_SETUP
-#line 92 "mini_c.l"
+#line 98 "mini_c.l"
 { return *yytext; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 93 "mini_c.l"
+#line 99 "mini_c.l"
 yyerror("lexical error : Unknown character"); 		/* lexical error */ 
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 94 "mini_c.l"
+#line 100 "mini_c.l"
 ECHO;
 	YY_BREAK
-#line 984 "lex.yy.c"
+#line 990 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1981,7 +1987,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 94 "mini_c.l"
+#line 100 "mini_c.l"
 
 
 

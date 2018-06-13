@@ -470,11 +470,11 @@ static const yytype_uint8 yytranslate[] =
   /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    27,    27,    28,    34,    35,    39,    40,    46,    47,
-      48,    49,    55,    61,    67,    73,    79,    80,    86,    87,
-      88,    94,    95,    96,    94,    98,   104,   105,   106,   112,
-     113,   114,   120,   121,   128,   135,   142,   143,   144,   145,
-     149,   154
+       0,    27,    27,    38,    44,    45,    50,    51,    57,    58,
+      59,    60,    66,    72,    78,    84,    90,    91,    97,    98,
+      99,   105,   106,   107,   105,   109,   115,   116,   117,   123,
+     124,   125,   131,   132,   139,   146,   153,   154,   155,   156,
+     161,   166
 };
 #endif
 
@@ -1300,253 +1300,264 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 27 "test.y" /* yacc.c:1646  */
-    { puts("YYACCEPT"); idx = 0; YYACCEPT;}
-#line 1306 "y.tab.c" /* yacc.c:1646  */
+#line 28 "test.y" /* yacc.c:1646  */
+    { 
+				puts("YYACCEPT"); 
+				
+				for(int i = 0; i < 2; i ++)
+				{
+					printf("%s\n", symTab[i]->sym);
+				}
+				
+				
+				idx = 0; YYACCEPT;}
+#line 1315 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 3:
-#line 28 "test.y" /* yacc.c:1646  */
+#line 38 "test.y" /* yacc.c:1646  */
     { printf("-? "); YYACCEPT;}
-#line 1312 "y.tab.c" /* yacc.c:1646  */
+#line 1321 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 4:
-#line 34 "test.y" /* yacc.c:1646  */
+#line 44 "test.y" /* yacc.c:1646  */
     { puts("stmt_list <== stmt_list stmt"); }
-#line 1318 "y.tab.c" /* yacc.c:1646  */
+#line 1327 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 5:
-#line 36 "test.y" /* yacc.c:1646  */
+#line 46 "test.y" /* yacc.c:1646  */
     { 
-				puts("stmt_list <== stmt_list stmt newLine"); printf("> ");
+				puts("stmt_list <== stmt_list stmt newLine");
+				printf("> ");
 			}
-#line 1326 "y.tab.c" /* yacc.c:1646  */
+#line 1336 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 6:
-#line 39 "test.y" /* yacc.c:1646  */
+#line 50 "test.y" /* yacc.c:1646  */
     { puts("stmt_list <== stmt newLine"); printf("> "); }
-#line 1332 "y.tab.c" /* yacc.c:1646  */
+#line 1342 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 7:
-#line 40 "test.y" /* yacc.c:1646  */
+#line 51 "test.y" /* yacc.c:1646  */
     { puts("stmt_list <== stmt"); }
-#line 1338 "y.tab.c" /* yacc.c:1646  */
+#line 1348 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 8:
-#line 46 "test.y" /* yacc.c:1646  */
+#line 57 "test.y" /* yacc.c:1646  */
     { puts("stmt <== selec" ); }
-#line 1344 "y.tab.c" /* yacc.c:1646  */
+#line 1354 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 9:
-#line 47 "test.y" /* yacc.c:1646  */
+#line 58 "test.y" /* yacc.c:1646  */
     { puts("stmt <== iter" ); }
-#line 1350 "y.tab.c" /* yacc.c:1646  */
+#line 1360 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 10:
-#line 48 "test.y" /* yacc.c:1646  */
+#line 59 "test.y" /* yacc.c:1646  */
     { puts("stmt <== print" ); }
-#line 1356 "y.tab.c" /* yacc.c:1646  */
+#line 1366 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 11:
-#line 49 "test.y" /* yacc.c:1646  */
+#line 60 "test.y" /* yacc.c:1646  */
     { puts("stmt <== expr" ); }
-#line 1362 "y.tab.c" /* yacc.c:1646  */
+#line 1372 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 12:
-#line 55 "test.y" /* yacc.c:1646  */
+#line 66 "test.y" /* yacc.c:1646  */
     { puts("selec <== IF" ); }
-#line 1368 "y.tab.c" /* yacc.c:1646  */
+#line 1378 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 13:
-#line 61 "test.y" /* yacc.c:1646  */
+#line 72 "test.y" /* yacc.c:1646  */
     { puts("iter <== WHILE" ); }
-#line 1374 "y.tab.c" /* yacc.c:1646  */
+#line 1384 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 14:
-#line 67 "test.y" /* yacc.c:1646  */
+#line 78 "test.y" /* yacc.c:1646  */
     { puts("print <== PRINT" ); }
-#line 1380 "y.tab.c" /* yacc.c:1646  */
+#line 1390 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 15:
-#line 73 "test.y" /* yacc.c:1646  */
+#line 84 "test.y" /* yacc.c:1646  */
     { puts("expr <== assign" ); }
-#line 1386 "y.tab.c" /* yacc.c:1646  */
+#line 1396 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 16:
-#line 79 "test.y" /* yacc.c:1646  */
+#line 90 "test.y" /* yacc.c:1646  */
     { puts("assign <== var = rel"); }
-#line 1392 "y.tab.c" /* yacc.c:1646  */
+#line 1402 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 17:
-#line 80 "test.y" /* yacc.c:1646  */
+#line 91 "test.y" /* yacc.c:1646  */
     { puts("assign <== rel"); }
-#line 1398 "y.tab.c" /* yacc.c:1646  */
+#line 1408 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 18:
-#line 86 "test.y" /* yacc.c:1646  */
+#line 97 "test.y" /* yacc.c:1646  */
     { puts("equal <== eq == rel");}
-#line 1404 "y.tab.c" /* yacc.c:1646  */
+#line 1414 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 19:
-#line 87 "test.y" /* yacc.c:1646  */
+#line 98 "test.y" /* yacc.c:1646  */
     { puts("equal <== eq != rel"); }
-#line 1410 "y.tab.c" /* yacc.c:1646  */
+#line 1420 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 20:
-#line 88 "test.y" /* yacc.c:1646  */
+#line 99 "test.y" /* yacc.c:1646  */
     { puts("equal <== rel"); }
-#line 1416 "y.tab.c" /* yacc.c:1646  */
+#line 1426 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 21:
-#line 94 "test.y" /* yacc.c:1646  */
+#line 105 "test.y" /* yacc.c:1646  */
     { puts("rel <== rel > addsub"); }
-#line 1422 "y.tab.c" /* yacc.c:1646  */
+#line 1432 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 22:
-#line 95 "test.y" /* yacc.c:1646  */
+#line 106 "test.y" /* yacc.c:1646  */
     { puts("rel <== rel < addsub"); }
-#line 1428 "y.tab.c" /* yacc.c:1646  */
+#line 1438 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 23:
-#line 96 "test.y" /* yacc.c:1646  */
+#line 107 "test.y" /* yacc.c:1646  */
     { puts("rel <== rel >= addsub");}
-#line 1434 "y.tab.c" /* yacc.c:1646  */
+#line 1444 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 24:
-#line 97 "test.y" /* yacc.c:1646  */
+#line 108 "test.y" /* yacc.c:1646  */
     { puts("rel <== rel <= addsub"); }
-#line 1440 "y.tab.c" /* yacc.c:1646  */
+#line 1450 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 25:
-#line 98 "test.y" /* yacc.c:1646  */
+#line 109 "test.y" /* yacc.c:1646  */
     { puts("rel <== addsub"); }
-#line 1446 "y.tab.c" /* yacc.c:1646  */
+#line 1456 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 26:
-#line 104 "test.y" /* yacc.c:1646  */
+#line 115 "test.y" /* yacc.c:1646  */
     { puts("addsub <== addsub + muldiv"); }
-#line 1452 "y.tab.c" /* yacc.c:1646  */
+#line 1462 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 27:
-#line 105 "test.y" /* yacc.c:1646  */
+#line 116 "test.y" /* yacc.c:1646  */
     { puts("addsub <== addsub - muldiv"); }
-#line 1458 "y.tab.c" /* yacc.c:1646  */
+#line 1468 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 28:
-#line 106 "test.y" /* yacc.c:1646  */
+#line 117 "test.y" /* yacc.c:1646  */
     { puts("addsub <== muldiv"); }
-#line 1464 "y.tab.c" /* yacc.c:1646  */
+#line 1474 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 29:
-#line 112 "test.y" /* yacc.c:1646  */
+#line 123 "test.y" /* yacc.c:1646  */
     { puts("muldiv <== muldiv * cast"); }
-#line 1470 "y.tab.c" /* yacc.c:1646  */
+#line 1480 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 30:
-#line 113 "test.y" /* yacc.c:1646  */
+#line 124 "test.y" /* yacc.c:1646  */
     { puts("muldiv <== muldiv / cast"); }
-#line 1476 "y.tab.c" /* yacc.c:1646  */
+#line 1486 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 31:
-#line 114 "test.y" /* yacc.c:1646  */
+#line 125 "test.y" /* yacc.c:1646  */
     { puts("muldiv <== cast"); }
-#line 1482 "y.tab.c" /* yacc.c:1646  */
+#line 1492 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 32:
-#line 120 "test.y" /* yacc.c:1646  */
+#line 131 "test.y" /* yacc.c:1646  */
     { puts("cast <== unary"); }
-#line 1488 "y.tab.c" /* yacc.c:1646  */
+#line 1498 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 33:
-#line 121 "test.y" /* yacc.c:1646  */
+#line 132 "test.y" /* yacc.c:1646  */
     { puts("cast <== primary"); }
-#line 1494 "y.tab.c" /* yacc.c:1646  */
+#line 1504 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 35:
-#line 135 "test.y" /* yacc.c:1646  */
+#line 146 "test.y" /* yacc.c:1646  */
     { puts("unary <== unary_op cast"); }
-#line 1500 "y.tab.c" /* yacc.c:1646  */
+#line 1510 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 36:
-#line 142 "test.y" /* yacc.c:1646  */
+#line 153 "test.y" /* yacc.c:1646  */
     { puts("primary <== ( stmt list )"); }
-#line 1506 "y.tab.c" /* yacc.c:1646  */
+#line 1516 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 37:
-#line 143 "test.y" /* yacc.c:1646  */
+#line 154 "test.y" /* yacc.c:1646  */
     { puts("primary <== var ()");}
-#line 1512 "y.tab.c" /* yacc.c:1646  */
+#line 1522 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 38:
-#line 144 "test.y" /* yacc.c:1646  */
+#line 155 "test.y" /* yacc.c:1646  */
     { puts("primary <== ( expr )"); }
-#line 1518 "y.tab.c" /* yacc.c:1646  */
+#line 1528 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 39:
-#line 146 "test.y" /* yacc.c:1646  */
+#line 157 "test.y" /* yacc.c:1646  */
     { 
 				puts("primary <== VAR"); 
+				
 			}
-#line 1526 "y.tab.c" /* yacc.c:1646  */
+#line 1537 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 40:
-#line 150 "test.y" /* yacc.c:1646  */
+#line 162 "test.y" /* yacc.c:1646  */
     { 
 				puts("primary <== INTEGER"); 
 				printf("%ld\n", yylval.val);
 			}
-#line 1535 "y.tab.c" /* yacc.c:1646  */
+#line 1546 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 41:
-#line 155 "test.y" /* yacc.c:1646  */
+#line 167 "test.y" /* yacc.c:1646  */
     { 
 				puts("primary <== DOUBLE"); 
 				double value = yylval.dval;
 				makeLeaf(typeDB, &value);
 
 			}
-#line 1546 "y.tab.c" /* yacc.c:1646  */
+#line 1557 "y.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1550 "y.tab.c" /* yacc.c:1646  */
+#line 1561 "y.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1774,7 +1785,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 164 "test.y" /* yacc.c:1906  */
+#line 176 "test.y" /* yacc.c:1906  */
 
 
 int yyerror(char* msg)
