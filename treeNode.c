@@ -71,12 +71,31 @@ nodePack* makeNode(int opr, int num, ...)
 	return p;
 }
 
-void execute(nodePack* p)
+int execute(nodePack* p)
 {
-	if(!p) return;
+	if(!p)
+	{
+		puts("w");
+		return 0;
+	}
 	switch(p->type)
 	{
-		case '+' : 
+		case typeINT : return p->intn.val;
+		case typeDB  : return p->dbn.dval;
+		case typeOpr :
+			switch(p->oprn.opr)
+			{
+				case '+' :	
+					// check type is same
+					if(p->oprn.op[0]->type != p->oprn.op[1]->type)
+					{
+						puts("type differ");
+					}
+					else{
+						printf("1: %d, 2: %d\n", execute(p->oprn.op[0]), execute(p->oprn.op[1]));
+						puts("type same");
+					}
+			}
 			
 			break;
 			

@@ -163,14 +163,14 @@ primary :
 			{ 
 				puts("primary <== VAR"); 
 				makeLeaf(typeVAR, &yylval.idx);
-				push(&pstack, makeLeaf(typeDB, &yylval.dval));
+				push(&pstack, makeLeaf(typeVAR, &yylval.dval));
 				
 			}
 		| INTEGER								
 			{ 
 				puts("primary <== INTEGER"); 
 				makeLeaf(typeINT, &yylval.val);
-				push(&pstack, makeLeaf(typeDB, &yylval.dval));
+				push(&pstack, makeLeaf(typeINT, &yylval.dval));
 			}
 		| DOUBLE								
 			{ 

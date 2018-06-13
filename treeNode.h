@@ -34,7 +34,7 @@ typedef struct _doub_node
 // node for operator
 typedef struct _opr_node
 {
-	typeTag opr; // type of operator
+	int opr; // type of operator
 	int nops; // number of operands
 	struct _node_pack *op[1]; // nodePack structure array for several operands.
 } oprNode;
@@ -59,7 +59,7 @@ typedef struct _sym_node
 
 nodePack* makeLeaf(typeTag type, void* value);
 nodePack* makeNode(int opr, int num, ...);
-void execute(nodePack* root);
+int execute(nodePack* p);
 
 #endif
 

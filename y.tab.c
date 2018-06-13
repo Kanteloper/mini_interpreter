@@ -1537,7 +1537,7 @@ yyreduce:
     { 
 				puts("primary <== VAR"); 
 				makeLeaf(typeVAR, &yylval.idx);
-				push(&pstack, makeLeaf(typeDB, &yylval.dval));
+				push(&pstack, makeLeaf(typeVAR, &yylval.dval));
 				
 			}
 #line 1544 "y.tab.c" /* yacc.c:1646  */
@@ -1548,7 +1548,7 @@ yyreduce:
     { 
 				puts("primary <== INTEGER"); 
 				makeLeaf(typeINT, &yylval.val);
-				push(&pstack, makeLeaf(typeDB, &yylval.dval));
+				push(&pstack, makeLeaf(typeINT, &yylval.dval));
 			}
 #line 1554 "y.tab.c" /* yacc.c:1646  */
     break;
