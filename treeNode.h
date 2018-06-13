@@ -41,13 +41,15 @@ typedef struct _opr_node
 
 typedef struct _node_pack
 {
-	typeTag type; // type of node
-	union // union for node according to type
+	typeTag type; // type of node 
+	// union for node according to type
+	union 
 	{
-		idNode idn;
+		idNode idn;	
 		intNode intn;
 		doubNode dbn;
 		oprNode oprn;
+
 	};
 } nodePack;
 
@@ -59,7 +61,7 @@ typedef struct _sym_node
 
 nodePack* makeLeaf(typeTag type, void* value);
 nodePack* makeNode(int opr, int num, ...);
-int execute(nodePack* p);
+nodePack* execute(nodePack* p);
 
 #endif
 
