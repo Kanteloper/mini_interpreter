@@ -24,7 +24,7 @@
 
 %%
 
-program : stmt_list ';'						{ puts("YYACCEPT"); YYACCEPT;}
+program : stmt_list ';' 					{ puts("YYACCEPT"); idx = 0; YYACCEPT;}
 		| '\n'								{ printf("-? "); YYACCEPT;}
 		;
 		 
@@ -32,7 +32,7 @@ program : stmt_list ';'						{ puts("YYACCEPT"); YYACCEPT;}
 
 stmt_list : 
 		  stmt_list stmt					{ puts("stmt_list <== stmt_list stmt"); }
-		  | stmt '\n'						{ puts("stmt_list <== stmt"); printf("> "); }			
+		  | stmt							{ puts("stmt_list <== stmt"); }			
 		  ;
 
 
