@@ -1,5 +1,6 @@
 %{
 	#include "y.tab.h"
+	#include "stack.h"
 	#include "treeNode.h"
 
 	#include <string.h>

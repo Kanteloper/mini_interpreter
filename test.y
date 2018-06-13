@@ -1,13 +1,17 @@
 %{
 	#include <stdio.h>
-
+	#include "stack.h"
 	#include "treeNode.h"
+
+	#define MAX_STK 100
 
 	int yyerror(char* msg);
 	int yylex();
 	int idx = 0;
-	extern char* yytext;
-	symNode* symTab[MAX_SYM];
+ 
+	symNode* symTab[MAX_SYM]; // symbol table
+	Stack pstack; // parse stack
+
 %}
 
 %union
@@ -151,17 +155,19 @@ primary :
 			{ 
 				puts("primary <== VAR"); 
 				makeLeaf(typeVAR, &yylval.idx);
+				push(&pstack, makeLeaf(typeDB, &yylval.dval));
 				
 			}
 		| INTEGER								
 			{ 
 				puts("primary <== INTEGER"); 
 				makeLeaf(typeINT, &yylval.val);
+				push(&pstack, makeLeaf(typeDB, &yylval.dval));
 			}
 		| DOUBLE								
 			{ 
 				puts("primary <== DOUBLE"); 
-				makeLeaf(typeDB, &yylval.dval);
+				push(&pstack, makeLeaf(typeDB, &yylval.dval));
 			}
 		;
 
@@ -176,6 +182,7 @@ int yyerror(char* msg)
 
 int main() {
 
+	stackInit(&pstack);	
 	printf("-? ");
 	while(!feof(stdin)) {
 		yyparse();

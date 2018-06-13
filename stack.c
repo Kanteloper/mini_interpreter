@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "stack.h"
+#include "treeNode.h"
 
 /*
  * function_name - stackInit
@@ -31,10 +32,10 @@ bool isEmpty(Stack* ls) {
 /*
  * function_name - push
  * type - void
- * param - {@stack : ls}, {@data : TreeNode*}
+ * param - {@stack : ls}, {@data : nodePack*}
  * detail - push data to a stack
  */
-void push(Stack* ls, TreeNode* data) {
+void push(Stack* ls, Data data) {
 
 	Node* newNode = (Node*)malloc(sizeof(Node));
 
@@ -88,6 +89,6 @@ Data peek(Stack* ls) {
  */
 void printStack(Stack* stack) {
 	while(!isEmpty(stack)) {
-		printf("stack : %s\n", pop(stack)->data);
+		printf("stack : %d\n", pop(stack)->type);
 	}
 }

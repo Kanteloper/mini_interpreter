@@ -1,10 +1,10 @@
 #ifndef __STACK_H
 #define _STACK_H
 
-#include "parseTree.h"
 #include <stdbool.h>
+#include "treeNode.h"
 
-typedef TreeNode* Data;
+typedef nodePack* Data;
 
 typedef struct _node {
 	Data data; 

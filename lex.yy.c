@@ -510,6 +510,7 @@ char *yytext;
 #line 1 "mini_c.l"
 #line 2 "mini_c.l"
 	#include "y.tab.h"
+	#include "stack.h"
 	#include "treeNode.h"
 
 	#include <string.h>
@@ -522,7 +523,7 @@ char *yytext;
 
 	extern symNode* symTab[MAX_SYM];
 	extern int idx;
-#line 526 "lex.yy.c"
+#line 527 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -740,10 +741,10 @@ YY_DECL
 		}
 
 	{
-#line 23 "mini_c.l"
+#line 24 "mini_c.l"
 
 
-#line 747 "lex.yy.c"
+#line 748 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -802,102 +803,102 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 25 "mini_c.l"
+#line 26 "mini_c.l"
 { return IF; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 26 "mini_c.l"
+#line 27 "mini_c.l"
 { return THEN; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 27 "mini_c.l"
+#line 28 "mini_c.l"
 { return ELSE; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 28 "mini_c.l"
+#line 29 "mini_c.l"
 { return END; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 29 "mini_c.l"
+#line 30 "mini_c.l"
 { return WHILE; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 30 "mini_c.l"
+#line 31 "mini_c.l"
 { return DEF; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 31 "mini_c.l"
+#line 32 "mini_c.l"
 { return LOCAL; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 32 "mini_c.l"
+#line 33 "mini_c.l"
 { return PRINT; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 34 "mini_c.l"
+#line 35 "mini_c.l"
 { return *yytext; }							/* assign */
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 35 "mini_c.l"
+#line 36 "mini_c.l"
 { return *yytext; }							/* relop > */
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 36 "mini_c.l"
+#line 37 "mini_c.l"
 { return *yytext; }							/* relop < */
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 37 "mini_c.l"
+#line 38 "mini_c.l"
 { return LQ; }								/* relop <= */
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 38 "mini_c.l"
+#line 39 "mini_c.l"
 { return GQ; }								/* relop >= */
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 39 "mini_c.l"
+#line 40 "mini_c.l"
 { return EQ; }								/* eqlop == */
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 40 "mini_c.l"
+#line 41 "mini_c.l"
 { return NQ; }								/* eqlop != */
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 41 "mini_c.l"
+#line 42 "mini_c.l"
 { return *yytext; }							/* plus */
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 42 "mini_c.l"
+#line 43 "mini_c.l"
 { return *yytext; }							/* minus */
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 43 "mini_c.l"
+#line 44 "mini_c.l"
 { return *yytext; }							/* multi */
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 44 "mini_c.l"
+#line 45 "mini_c.l"
 { return *yytext; }							/* div */
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 47 "mini_c.l"
+#line 48 "mini_c.l"
 {	/* integer */
 					if(strlen(yytext) > 10) // only 10 size
 					{
@@ -916,7 +917,7 @@ YY_RULE_SETUP
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 62 "mini_c.l"
+#line 63 "mini_c.l"
 { /* double */
 					if(strlen(yytext) > 10)
 					{
@@ -934,17 +935,17 @@ YY_RULE_SETUP
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 76 "mini_c.l"
+#line 77 "mini_c.l"
 yyerror("lexical error : Unknown character");  	
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 77 "mini_c.l"
+#line 78 "mini_c.l"
 yyerror("lexical error : Unknown character");  
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 78 "mini_c.l"
+#line 79 "mini_c.l"
 {
 					symTab[idx] = (symNode*)malloc(sizeof(symNode));					
 
@@ -967,26 +968,26 @@ YY_RULE_SETUP
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 97 "mini_c.l"
+#line 98 "mini_c.l"
 ;													/* ignore whitespace */
 	YY_BREAK
 case 26:
 /* rule 26 can match eol */
 YY_RULE_SETUP
-#line 98 "mini_c.l"
+#line 99 "mini_c.l"
 { return *yytext; }
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 99 "mini_c.l"
+#line 100 "mini_c.l"
 yyerror("lexical error : Unknown character"); 		/* lexical error */ 
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 100 "mini_c.l"
+#line 101 "mini_c.l"
 ECHO;
 	YY_BREAK
-#line 990 "lex.yy.c"
+#line 991 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1987,7 +1988,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 100 "mini_c.l"
+#line 101 "mini_c.l"
 
 
 

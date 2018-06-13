@@ -1,9 +1,20 @@
 #ifndef __TREE_NODE_H
 #define __TREE_NODE_H
 
+#include <stdarg.h>
+
 #define MAX_SYM 100
 
-typedef enum { typeINT, typeDB, typeVAR } typeTag;
+typedef enum 
+{ 
+	typeINT, 
+	typeDB, 
+	typeVAR,  
+	opPLUS,
+	opMINUS,
+	opMULT,
+	opDIV
+} typeTag;
 
 // node for identifier
 typedef struct _id_node
@@ -23,6 +34,14 @@ typedef struct _doub_node
 	double dval; // size of number 10
 } doubNode;
 
+// node for operator
+typedef struct _opr_node
+{
+	typeTag type; // type of operator
+	int nops; // number of operands
+	struct _node_pack *op[1]; // nodePack structure array for several operands.
+} oprNode;
+
 typedef struct _node_pack
 {
 	typeTag type; // type of node
@@ -31,6 +50,7 @@ typedef struct _node_pack
 		idNode idn;
 		intNode intn;
 		doubNode dbn;
+		oprNode oprn;
 	};
 } nodePack;
 
@@ -41,7 +61,7 @@ typedef struct _sym_node
 } symNode;
 
 nodePack* makeLeaf(typeTag type, void* value);
-
+nodePack* makeNode(typeTag type, int num, ...);
 
 #endif
 
