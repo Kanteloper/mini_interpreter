@@ -132,8 +132,20 @@ addsub_expr :
 
 
 muldiv_expr :
-			muldiv_expr '*' cast				{ puts("muldiv <== muldiv * cast"); }
-			| muldiv_expr '/' cast				{ puts("muldiv <== muldiv / cast"); }
+			muldiv_expr '*' cast				
+				{
+					puts("muldiv <== muldiv * cast");
+					nodePack* s2 = pop(&pstack);
+					nodePack* s1 = pop(&pstack);
+					push(&pstack, makeNode('*', 2, s1, s2));
+				}
+			| muldiv_expr '/' cast				
+				{ 
+					puts("muldiv <== muldiv / cast");
+					nodePack* s2 = pop(&pstack);
+					nodePack* s1 = pop(&pstack);
+					push(&pstack, makeNode('/', 2, s1, s2));
+				}
 			| cast								{ puts("muldiv <== cast"); }
 			;
 

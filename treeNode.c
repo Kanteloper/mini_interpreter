@@ -137,7 +137,36 @@ nodePack* execute(nodePack* p)
 				}
 			}
 			break;
+
 	    case '*' :
+			// check type is same
+			if(p->oprn.op[0]->type != p->oprn.op[1]->type) // differ
+			{
+				// find int type 
+				if(p->oprn.op[0]->type == typeINT)
+				{
+					printf("%.2f\n", 
+					(double)p->oprn.op[0]->intn.val * p->oprn.op[1]->dbn.dval);
+				}
+				else
+				{
+					printf("%.2f\n", 
+					p->oprn.op[0]->dbn.dval * (double)p->oprn.op[1]->intn.val);
+				}
+
+			}
+			else
+			{ // same
+	
+				if(p->oprn.op[0]->type == typeINT) // int
+				{
+					printf("%d\n", p->oprn.op[0]->intn.val * p->oprn.op[1]->intn.val);
+				}
+				else // double
+				{
+					printf("%.2f\n", p->oprn.op[0]->dbn.dval * p->oprn.op[1]->dbn.dval);
+				}
+			}
 			break;
 	    case '/' :
 			break;
