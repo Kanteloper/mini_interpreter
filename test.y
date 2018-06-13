@@ -27,14 +27,8 @@
 program : stmt_list ';' 					
 			{ 
 				puts("YYACCEPT"); 
-				
-				for(int i = 0; i < 2; i ++)
-				{
-					printf("%s\n", symTab[i]->sym);
-				}
-				
-				
-				idx = 0; YYACCEPT;}
+				idx = 0; YYACCEPT;
+			}
 		| '\n'								{ printf("-? "); YYACCEPT;}
 		;
 		 
@@ -156,19 +150,18 @@ primary :
 		| VAR									
 			{ 
 				puts("primary <== VAR"); 
+				makeLeaf(typeVAR, &yylval.idx);
 				
 			}
 		| INTEGER								
 			{ 
 				puts("primary <== INTEGER"); 
-				printf("%ld\n", yylval.val);
+				makeLeaf(typeINT, &yylval.val);
 			}
 		| DOUBLE								
 			{ 
 				puts("primary <== DOUBLE"); 
-				double value = yylval.dval;
-				makeLeaf(typeDB, &value);
-
+				makeLeaf(typeDB, &yylval.dval);
 			}
 		;
 
