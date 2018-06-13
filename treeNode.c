@@ -76,6 +76,17 @@ nodePack* execute(nodePack* p)
 	if(!p)	return NULL;
 	switch(p->oprn.opr)
 	{
+		case UMINUS :
+				if(p->oprn.op[0]->type == typeINT) // int
+				{
+					printf("%d\n", -p->oprn.op[0]->intn.val); 
+				}
+				else // double
+				{
+					printf("%.2f\n", -p->oprn.op[0]->dbn.dval); 
+				}
+			break;
+
 		case '+' :	
 			// check type is same
 			if(p->oprn.op[0]->type != p->oprn.op[1]->type) // differ

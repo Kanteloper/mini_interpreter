@@ -115,16 +115,16 @@ addsub_expr :
 			addsub_expr '+' muldiv_expr			
 				{
 					puts("addsub <== addsub + muldiv");
-					nodePack* s2 = pop(&pstack);
+					nodePack* s3 = pop(&pstack);
 					nodePack* s1 = pop(&pstack);
-					push(&pstack, makeNode('+', 2, s1, s2));
+					push(&pstack, makeNode('+', 2, s1, s3));
 				}
 			|addsub_expr '-' muldiv_expr		
 				{ 
 					puts("addsub <== addsub - muldiv");
-					nodePack* s2 = pop(&pstack);
+					nodePack* s3 = pop(&pstack);
 					nodePack* s1 = pop(&pstack);
-					push(&pstack, makeNode('-', 2, s1, s2));
+					push(&pstack, makeNode('-', 2, s1, s3));
 				}
 			| muldiv_expr						{ puts("addsub <== muldiv"); }
 			;
@@ -135,23 +135,23 @@ muldiv_expr :
 			muldiv_expr '*' cast				
 				{
 					puts("muldiv <== muldiv * cast");
-					nodePack* s2 = pop(&pstack);
+					nodePack* s3 = pop(&pstack);
 					nodePack* s1 = pop(&pstack);
-					push(&pstack, makeNode('*', 2, s1, s2));
+					push(&pstack, makeNode('*', 2, s1, s3));
 				}
 			| muldiv_expr '/' cast				
 				{ 
 					puts("muldiv <== muldiv / cast");
-					nodePack* s2 = pop(&pstack);
+					nodePack* s3 = pop(&pstack);
 					nodePack* s1 = pop(&pstack);
-					if(s2->dbn.dval == 0.0 || s2->intn.val == 0)
+					if(s3->dbn.dval == 0.0 || s3->intn.val == 0)
 					{
 						yyerror("divide by zero");
 						YYACCEPT;
 					}
 					else 
 					{
-						push(&pstack, makeNode('/', 2, s1, s2));
+						push(&pstack, makeNode('/', 2, s1, s3));
 					}
 				}
 			| cast								{ puts("muldiv <== cast"); }
@@ -160,8 +160,13 @@ muldiv_expr :
 
 
 cast :
-	  unary_expr									{ puts("cast <== unary"); }
-	 | primary										{ puts("cast <== primary"); }
+	  unary_expr									
+		{ 
+			puts("cast <== unary_expr");
+			nodePack* s1 = pop(&pstack);
+			push(&pstack, makeNode(UMINUS, 1, s1));
+		}
+	 | primary									{ puts("cast <== primary"); }
 	 ;
 
 
@@ -175,7 +180,7 @@ unary_op :
 
 
 unary_expr :
-		   unary_op cast						{ puts("unary <== unary_op cast"); }
+		   unary_op cast						{ puts("unary_expr <== unary_op cast"); }
 		   ;
 
 

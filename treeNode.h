@@ -10,7 +10,8 @@ typedef enum
 	typeINT, 
 	typeDB, 
 	typeVAR,  
-	typeOpr
+	typeOpr,
+	UMINUS
 } typeTag;
 
 // node for identifier
