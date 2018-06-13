@@ -119,7 +119,13 @@ addsub_expr :
 					nodePack* s1 = pop(&pstack);
 					push(&pstack, makeNode('+', 2, s1, s2));
 				}
-			|addsub_expr '-' muldiv_expr		{ puts("addsub <== addsub - muldiv"); }
+			|addsub_expr '-' muldiv_expr		
+				{ 
+					puts("addsub <== addsub - muldiv");
+					nodePack* s2 = pop(&pstack);
+					nodePack* s1 = pop(&pstack);
+					push(&pstack, makeNode('-', 2, s1, s2));
+				}
 			| muldiv_expr						{ puts("addsub <== muldiv"); }
 			;
 
@@ -175,6 +181,7 @@ primary :
 		| DOUBLE								
 			{ 
 				puts("primary <== DOUBLE"); 
+				makeLeaf(typeDB, &yylval.val);
 				push(&pstack, makeLeaf(typeDB, &yylval.dval));
 			}
 		;
