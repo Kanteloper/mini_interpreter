@@ -149,7 +149,7 @@ union YYSTYPE
 #line 12 "test.y" /* yacc.c:355  */
 
 	double dval;
-	int val;
+	long val;
 
 #line 155 "y.tab.c" /* yacc.c:355  */
 };
@@ -1501,7 +1501,7 @@ yyreduce:
 #line 142 "test.y" /* yacc.c:1646  */
     { 
 				puts("primary <== INTEGER"); 
-				printf("%d\n", INTEGER);
+				printf("%ld\n", yylval.val);
 			}
 #line 1507 "y.tab.c" /* yacc.c:1646  */
     break;

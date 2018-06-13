@@ -11,7 +11,7 @@
 %union
 {
 	double dval;
-	int val;
+	long val;
 }
 
 %token VAR DOUBLE INTEGER
@@ -141,7 +141,7 @@ primary :
 		| INTEGER								
 			{ 
 				puts("primary <== INTEGER"); 
-				printf("%d\n", INTEGER);
+				printf("%ld\n", yylval.val);
 			}
 		| DOUBLE								
 			{ 

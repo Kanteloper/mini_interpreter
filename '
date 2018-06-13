@@ -43,7 +43,7 @@ double ([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?
 					{
 						number = (char*)malloc(sizeof(char) * 11);
 						strncpy(number, &yytext[yyleng - num_len], num_len);
-						yylval.val = atol(number);
+						yylval.val = atoi(number); 
 						free(number);
 					}
 					else 
@@ -59,20 +59,16 @@ double ([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?
 						number = (char*)malloc(sizeof(char) * 11);
 						strncpy(number, &yytext[yyleng - num_len], num_len);
 						yylval.dval = atof(number);
-						free(number);
 					}
 					else
 					{
-						yylval.dval = atof(yytext); 
-					}
-					return DOUBLE;
-				}  
-{digit_first}	yyerror("lexical error : Unknown character");  	
-{under_score}	yyerror("lexical error : Unknown character");  
-{id}			{
 					
-					return VAR; 
-				}
+					}
+					yylval.dval = atof(yytext); return DOUBLE;
+				}  
+{digit_first}	  return yytext[0];	
+{under_score}	  return yytext[0];
+{id}			{ return VAR; }
 [ \t]			;													/* ignore whitespace */
 [\n]			{ return *yytext; }
 .		   	    yyerror("lexical error : Unknown character"); 		/* lexical error */ 

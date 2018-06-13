@@ -87,7 +87,7 @@ union YYSTYPE
 #line 12 "test.y" /* yacc.c:1909  */
 
 	double dval;
-	int val;
+	long val;
 
 #line 93 "y.tab.h" /* yacc.c:1909  */
 };
