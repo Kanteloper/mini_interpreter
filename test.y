@@ -94,13 +94,27 @@ stmt :
 
 
 selec_stmt :
-		   IF '('  ')' ELSE END				{ puts("selec <== IF" ); }
+		   IF '(' expr_stmt ')' stmt_list ELSE stmt_list END  
+			{
+				puts("selec <== IF" );
+				nodePack* s7 = pop(&pstack);
+				nodePack* s5 = pop(&pstack);
+				nodePack* s3 = pop(&pstack);
+				push(&pstack, makeNode(IF, 3, s3, s5, s7));
+			}
 		   ;
 
 
 
 iter_stmt : 
-		  WHILE '(' ')' END					{ puts("iter <== WHILE" ); }
+		  WHILE '(' expr_stmt ')' stmt_list END				
+			{
+				puts("iter <== WHILE" );	
+				nodePack* s5 = pop(&pstack);
+				nodePack* s3 = pop(&pstack);
+				push(&pstack, makeNode(WHILE, 2, s3, s5));
+			}
+			|
 		  ;
 
 
@@ -279,7 +293,6 @@ primary :
 		| VAR									
 			{ 
 				puts("primary <== VAR"); 
-				printf("index: %d\n", yylval.idx);
 				push(&pstack, makeLeaf(typeVAR, &yylval.idx));
 				
 			}
@@ -307,9 +320,9 @@ int yyerror(char* msg)
 
 int main() {
 
-	stackInit(&pstack);	
 	printf("-? ");
 	while(!feof(stdin)) {
+	stackInit(&pstack);	
 		yyparse();
 	}
 	return 0;

@@ -965,12 +965,12 @@ YY_RULE_SETUP
 case 25:
 YY_RULE_SETUP
 #line 93 "mini_c.l"
-yyerror("lexical error : Unknown character");  	
+{ puts("Unknown characters"); return yytext[0]; }  	
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
 #line 94 "mini_c.l"
-yyerror("lexical error : Unknown character");  
+{ puts("Unknown characters"); return yytext[0]; }   
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
@@ -1024,7 +1024,7 @@ YY_RULE_SETUP
 case 30:
 YY_RULE_SETUP
 #line 133 "mini_c.l"
-yyerror("lexical error : Unknown character"); 		/* lexical error */ 
+{ puts("Unknown characters"); return yytext[0]; } 		/* lexical error */ 
 	YY_BREAK
 case 31:
 YY_RULE_SETUP

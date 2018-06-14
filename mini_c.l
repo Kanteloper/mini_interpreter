@@ -90,8 +90,8 @@ double ([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?
 				return DOUBLE;
 			}  
 
-{digit_first}	yyerror("lexical error : Unknown character");  	
-{under_score}	yyerror("lexical error : Unknown character");  
+{digit_first}	{ puts("Unknown characters"); return yytext[0]; }  	
+{under_score}	{ puts("Unknown characters"); return yytext[0]; }   
 
 {id}		{
 				input_flag = 1;
@@ -130,5 +130,5 @@ double ([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?
 			}
 [ \t]			;													/* ignore whitespace */
 [;]			{ input_flag = 1; return *yytext; }
-.		   	yyerror("lexical error : Unknown character"); 		/* lexical error */ 
+.		   	{ puts("Unknown characters"); return yytext[0]; } 		/* lexical error */ 
 %%

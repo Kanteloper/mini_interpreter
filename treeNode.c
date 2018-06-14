@@ -124,6 +124,23 @@ double ex(nodePack* p)
 				case  EQ :	return ex(p->oprn.op[0]) == ex(p->oprn.op[1]);
 				case  NQ :	return ex(p->oprn.op[0]) != ex(p->oprn.op[1]);
 				case PRINT : return ex(p->oprn.op[0]);
+				case WHILE : 
+						while(ex(p->oprn.op[0])) 
+						{
+							puts("while");
+							return ex(p->oprn.op[1]);  
+						}
+				case IF : 
+						if(ex(p->oprn.op[0]))
+						{
+							puts("if");
+							 return ex(p->oprn.op[1]);
+						}
+						else if(p->oprn.nops > 2)
+						{
+							 puts("if");
+							 return ex(p->oprn.op[2]);
+						}
 			}
 			break;
 	}
