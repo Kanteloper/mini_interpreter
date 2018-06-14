@@ -375,8 +375,8 @@ static void yy_fatal_error (yyconst char msg[]  );
 	*yy_cp = '\0'; \
 	(yy_c_buf_p) = yy_cp;
 
-#define YY_NUM_RULES 30
-#define YY_END_OF_BUFFER 31
+#define YY_NUM_RULES 31
+#define YY_END_OF_BUFFER 32
 /* This struct is not used in this scanner,
    but its presence is necessary. */
 struct yy_trans_info
@@ -386,13 +386,13 @@ struct yy_trans_info
 	};
 static yyconst flex_int16_t yy_accept[68] =
     {   0,
-        0,    0,   31,   29,   27,   28,   29,   20,   21,   18,
-       16,   17,   29,   19,   22,   28,   11,    9,   10,   26,
-       25,   26,   26,   26,   26,   26,   26,   26,   15,   23,
-        0,   22,   24,   24,   12,   14,   13,   26,   25,   26,
-       26,   26,    1,   26,   26,   26,   26,    0,    0,   23,
-        6,   26,    4,   26,   26,   26,   26,   23,    3,   26,
-       26,    2,   26,    7,    8,    5,    0
+        0,    0,   32,   30,   28,   22,   30,   20,   21,   18,
+       16,   17,   30,   19,   23,   29,   11,    9,   10,   27,
+       26,   27,   27,   27,   27,   27,   27,   27,   15,   24,
+        0,   23,   25,   25,   12,   14,   13,   27,   26,   27,
+       27,   27,    1,   27,   27,   27,   27,    0,    0,   24,
+        6,   27,    4,   27,   27,   27,   27,   24,    3,   27,
+       27,    2,   27,    7,    8,    5,    0
     } ;
 
 static yyconst YY_CHAR yy_ec[256] =
@@ -520,11 +520,13 @@ char *yytext;
 	void yyerror(char* );
 	size_t num_len = 10;
 	size_t var_len = 16;
+	int input_flag = 0;
 	char* token;
 
 	extern symNode* symTab[MAX_SYM];
 	extern int idx;
-#line 528 "lex.yy.c"
+	extern int input_flag;
+#line 530 "lex.yy.c"
 
 #define INITIAL 0
 
@@ -742,10 +744,10 @@ YY_DECL
 		}
 
 	{
-#line 25 "mini_c.l"
+#line 27 "mini_c.l"
 
 
-#line 749 "lex.yy.c"
+#line 751 "lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -804,217 +806,226 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 27 "mini_c.l"
-{ return IF; }
+#line 29 "mini_c.l"
+{ input_flag = 0; return IF; }
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 28 "mini_c.l"
-{ return THEN; }
+#line 30 "mini_c.l"
+{ input_flag = 0; return THEN; }
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 29 "mini_c.l"
-{ return ELSE; }
+#line 31 "mini_c.l"
+{ input_flag = 0; return ELSE; }
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 30 "mini_c.l"
-{ return END; }
+#line 32 "mini_c.l"
+{ input_flag = 0; return END; }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 31 "mini_c.l"
-{ return WHILE; }
+#line 33 "mini_c.l"
+{ input_flag = 0; return WHILE; }
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 32 "mini_c.l"
-{ return DEF; }
+#line 34 "mini_c.l"
+{ input_flag = 0; return DEF; }
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 33 "mini_c.l"
-{ return LOCAL; }
+#line 35 "mini_c.l"
+{ input_flag = 0; return LOCAL; }
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 34 "mini_c.l"
-{ return PRINT; }
+#line 36 "mini_c.l"
+{ input_flag = 0; return PRINT; }
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 36 "mini_c.l"
-{ return *yytext; }							/* assign */
+#line 38 "mini_c.l"
+{ input_flag = 0; return *yytext; }							/* assign */
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 37 "mini_c.l"
-{ return *yytext; }							/* relop > */
+#line 39 "mini_c.l"
+{ input_flag = 0; return *yytext; }							/* relop > */
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 38 "mini_c.l"
-{ return *yytext; }							/* relop < */
+#line 40 "mini_c.l"
+{ input_flag = 0; return *yytext; }							/* relop < */
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 39 "mini_c.l"
-{ return LQ; }								/* relop <= */
+#line 41 "mini_c.l"
+{ input_flag = 0; return LQ; }								/* relop <= */
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 40 "mini_c.l"
-{ return GQ; }								/* relop >= */
+#line 42 "mini_c.l"
+{ input_flag = 0; return GQ; }								/* relop >= */
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 41 "mini_c.l"
-{ return EQ; }								/* eqlop == */
+#line 43 "mini_c.l"
+{ input_flag = 0; return EQ; }								/* eqlop == */
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 42 "mini_c.l"
-{ return NQ; }								/* eqlop != */
+#line 44 "mini_c.l"
+{ input_flag = 0; return NQ; }								/* eqlop != */
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 43 "mini_c.l"
-{ return *yytext; }							/* plus */
+#line 45 "mini_c.l"
+{ input_flag = 0; return *yytext; }							/* plus */
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 44 "mini_c.l"
-{ return *yytext; }							/* minus */
+#line 46 "mini_c.l"
+{ input_flag = 0; return *yytext; }							/* minus */
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 45 "mini_c.l"
-{ return *yytext; }							/* multi */
+#line 47 "mini_c.l"
+{ input_flag = 0; return *yytext; }							/* multi */
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 46 "mini_c.l"
-{ return *yytext; }							/* div */
+#line 48 "mini_c.l"
+{ input_flag = 0; return *yytext; }							/* div */
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 47 "mini_c.l"
-{ return *yytext; }							/* right parenthesis */
+#line 49 "mini_c.l"
+{ input_flag = 0; return *yytext; }							/* right parenthesis */
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 48 "mini_c.l"
-{ return *yytext; }							/* left parenthesis */
+#line 50 "mini_c.l"
+{ input_flag = 0; return *yytext; }							/* left parenthesis */
 	YY_BREAK
 case 22:
+/* rule 22 can match eol */
 YY_RULE_SETUP
 #line 51 "mini_c.l"
-{	/* integer */
-					if(strlen(yytext) > 10) // only 10 size
-					{
-						token = (char*)malloc(sizeof(char) * 11);
-						strncpy(token, &yytext[yyleng - num_len], num_len);
-						yylval.val = atol(token);
-						free(token);
-					}
-					else 
-					{
-						yylval.val = atoi(yytext); 
-					}
-					return INTEGER; 
-				
-				}	
+{  /* enter */ 
+				if(input_flag == 0)  printf("> ");
+			}	
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 66 "mini_c.l"
-{ /* double */
-					if(strlen(yytext) > 10)
-					{
-						token = (char*)malloc(sizeof(char) * 11);
-						strncpy(token, &yytext[yyleng - num_len], num_len);
-						yylval.dval = atof(token);
-						free(token);
-					}
-					else
-					{
-						yylval.dval = atof(yytext); 
-					}
-					return DOUBLE;
-				}  
+#line 55 "mini_c.l"
+{	 /* integer */
+				input_flag = 0;
+				if(strlen(yytext) > 10) // only 10 size
+				{
+					token = (char*)malloc(sizeof(char) * 11);
+					strncpy(token, &yytext[yyleng - num_len], num_len);
+					yylval.val = atol(token);
+					free(token);
+				}
+				else 
+				{
+					yylval.val = atoi(yytext); 
+				}
+				return INTEGER; 
+			}	
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 80 "mini_c.l"
-yyerror("lexical error : Unknown character");  	
+#line 70 "mini_c.l"
+{  /* double */
+				input_flag = 0;
+
+				if(strlen(yytext) > 10)
+				{					
+					token = (char*)malloc(sizeof(char) * 11);
+					strncpy(token, &yytext[yyleng - num_len], num_len);
+					yylval.dval = atof(token);
+					free(token);
+				}
+				else
+				{
+					yylval.dval = atof(yytext); 
+				}
+				return DOUBLE;
+			}  
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 81 "mini_c.l"
-yyerror("lexical error : Unknown character");  
+#line 87 "mini_c.l"
+yyerror("lexical error : Unknown character");  	
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 82 "mini_c.l"
-{
-					symTab[idx] = (symNode*)malloc(sizeof(symNode));					
-					if(strlen(yytext) > 16) // over 16 characters
-					{
-						if(!beDuplicated(symTab, yytext)) // not duplicated
-						{
-							symTab[idx]->sym = (char*)malloc(sizeof(char) * 17);
-							strncpy(symTab[idx]->sym, yytext, var_len);
-							yylval.idx = idx;
-							idx++;
-						}
-						else // duplicated 
-						{
-							// search
-							yylval.idx = searchSym(symTab, yytext);
-						}
-					}
-					else
-					{	
-						if(!beDuplicated(symTab, yytext)) // not duplicated
-						{
-							puts("w2");
-							symTab[idx]->sym = malloc(sizeof(char) * (strlen(yytext) + 1));
-							strncpy(symTab[idx]->sym, yytext, strlen(yytext));
-							yylval.idx = idx;
-							idx++;
-						}
-						else // duplicated 
-						{
-							// search
-							yylval.idx = searchSym(symTab, yytext);
-						}
-					}
-					return VAR; 
-				}
+#line 88 "mini_c.l"
+yyerror("lexical error : Unknown character");  
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 117 "mini_c.l"
-;													/* ignore whitespace */
+#line 90 "mini_c.l"
+{
+				input_flag = 0;
+				symTab[idx] = (symNode*)malloc(sizeof(symNode));					
+				if(strlen(yytext) > 16) // over 16 characters
+				{
+					if(!beDuplicated(symTab, yytext)) // not duplicated
+					{
+						symTab[idx]->sym = (char*)malloc(sizeof(char) * 17);
+						strncpy(symTab[idx]->sym, yytext, var_len);
+						yylval.idx = idx;
+						idx++;
+					}
+					else // duplicated 
+					{
+						// search	
+						yylval.idx = searchSym(symTab, yytext);
+					}
+				}
+				else
+				{	
+					if(!beDuplicated(symTab, yytext)) // not duplicated
+					{
+						symTab[idx]->sym = malloc(sizeof(char) * (strlen(yytext) + 1));
+						strncpy(symTab[idx]->sym, yytext, strlen(yytext));
+						yylval.idx = idx;
+						idx++;
+					}
+					else // duplicated 
+					{
+						// search
+						yylval.idx = searchSym(symTab, yytext);
+					}
+				}
+				return VAR; 
+			}
 	YY_BREAK
 case 28:
-/* rule 28 can match eol */
 YY_RULE_SETUP
-#line 118 "mini_c.l"
-{ return *yytext; }
+#line 125 "mini_c.l"
+;													/* ignore whitespace */
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 119 "mini_c.l"
-yyerror("lexical error : Unknown character"); 		/* lexical error */ 
+#line 126 "mini_c.l"
+{ input_flag = 0; return *yytext; }
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 120 "mini_c.l"
+#line 127 "mini_c.l"
+yyerror("lexical error : Unknown character"); 		/* lexical error */ 
+	YY_BREAK
+case 31:
+YY_RULE_SETUP
+#line 128 "mini_c.l"
 ECHO;
 	YY_BREAK
-#line 1018 "lex.yy.c"
+#line 1029 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2015,7 +2026,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 120 "mini_c.l"
+#line 128 "mini_c.l"
 
 
 

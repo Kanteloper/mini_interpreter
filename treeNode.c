@@ -9,6 +9,7 @@
 #include "stack.h"
 
 extern symNode* symTab[MAX_SYM];
+int div_flag = 0;
 int error_flag = 0;
 
 nodePack* makeLeaf(typeTag type, void* value)
@@ -79,6 +80,7 @@ nodePack* makeNode(int opr, int num, ...)
 
 double ex(nodePack* p)
 {
+	double divzero;
 	if(!p)	return 0.0;
 	switch(p->type)
 	{
@@ -104,7 +106,17 @@ double ex(nodePack* p)
 				case '+' :	return ex(p->oprn.op[0]) + ex(p->oprn.op[1]);
 				case '-' :  return ex(p->oprn.op[0]) - ex(p->oprn.op[1]);
 				case '*' :  return ex(p->oprn.op[0]) * ex(p->oprn.op[1]);
-				case '/' : 	return ex(p->oprn.op[0]) / ex(p->oprn.op[1]);
+				case '/' : 
+						divzero = ex(p->oprn.op[1]);			
+						if(divzero != 0.0)
+						{
+							return ex(p->oprn.op[0]) / ex(p->oprn.op[1]);
+						}
+						else 
+						{
+							div_flag = 1;
+							return 0.0;
+						}
 				case '>' :	return ex(p->oprn.op[0]) > ex(p->oprn.op[1]);
 				case '<' :	return ex(p->oprn.op[0]) < ex(p->oprn.op[1]);
 				case  GQ :	return ex(p->oprn.op[0]) >= ex(p->oprn.op[1]);

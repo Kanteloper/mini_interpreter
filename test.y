@@ -10,6 +10,8 @@
 	int cast_flag = 0;
 	int idx = 0;
 	extern int error_flag;
+	extern int div_flag;
+	extern int input_flag;
  
 	symNode* symTab[MAX_SYM]; // symbol table
 	Stack pstack; // parse stack
@@ -32,12 +34,28 @@
 %%
 
 program : stmt_list ';' 					
-			{ 
-				puts("YYACCEPT");
-
+			{
+			
+				input_flag = 1;
 				if( cast_flag != 0 ) // print int
 				{
-					printf("%d\n", (int)ex(pop(&pstack)));
+					int result = (int)ex(pop(&pstack)); 
+					if(error_flag != 0)
+					{
+						yyerror("syntax error: variable is not defined");	
+						error_flag = 0;
+						printf("-? ");
+						YYACCEPT;
+					}
+					if(div_flag != 0)
+					{
+						yyerror("syntax error: divide by zero");	
+						error_flag = 0;
+						printf("-? ");
+						YYACCEPT;
+					}
+
+					printf("%d\n", result); printf("-? ");
 				}
 				else // print double 
 				{
@@ -46,26 +64,22 @@ program : stmt_list ';'
 					{
 						yyerror("syntax error: variable is not defined");	
 						error_flag = 0;
+						printf("-? ");
 						YYACCEPT;
 					}
-					printf("%.2f\n", result);
+					printf("%.2f\n", result); printf("-? ");
 				}
+
 				YYACCEPT;
 			}
-		| '\n'								{ printf("-? "); YYACCEPT;}
+		|
 		;
 		 
 		 
 
 stmt_list : 
-		  stmt_list stmt					{ puts("stmt_list <== stmt_list stmt"); }
-		  | stmt_list stmt '\n'				
-			{ 
-				puts("stmt_list <== stmt_list stmt newLine");
-				printf("> ");
-			}
-		  | stmt '\n'						{ puts("stmt_list <== stmt newLine"); printf("> "); }
-		  | stmt							{ puts("stmt_list <== stmt"); }			
+		  stmt_list stmt					{ puts("stmt_list <== stmt_list stmt");} 
+		  | stmt							{ puts("stmt_list <== stmt");}			
 		  ;
 
 
