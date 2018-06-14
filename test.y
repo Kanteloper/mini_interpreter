@@ -197,7 +197,7 @@ unary_expr :
 
 primary :
 		VAR '(' stmt_list ')'					{ puts("primary <== ( stmt list )"); }
-		| VAR '(' ')'							{ puts("primary <== var ()");}
+		| VAR '(' ')'							{ puts("primary <== var ()"); }
 		| '(' expr_stmt ')'						{ puts("primary <== ( expr )"); }
 		| VAR									
 			{ 

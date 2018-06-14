@@ -43,6 +43,8 @@ double ([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?
 "-"			{ return *yytext; }							/* minus */
 "*"			{ return *yytext; }							/* multi */
 "/"			{ return *yytext; }							/* div */
+"("			{ return *yytext; }							/* right parenthesis */
+")"			{ return *yytext; }							/* left parenthesis */
 
 
 {int}			{	/* integer */

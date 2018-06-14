@@ -1557,7 +1557,7 @@ yyreduce:
 
   case 37:
 #line 200 "test.y" /* yacc.c:1646  */
-    { puts("primary <== var ()");}
+    { puts("primary <== var ()"); }
 #line 1562 "y.tab.c" /* yacc.c:1646  */
     break;
 
