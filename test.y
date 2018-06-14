@@ -96,8 +96,14 @@ expr_stmt :
 
 
 assign_expr : 
-			VAR '=' equal_expr					{ puts("assign <== var = rel"); }
-			| equal_expr		 				{ puts("assign <== rel"); }
+			equal_expr '=' equal_expr					
+				{	
+					puts("assign <== var = equal"); 
+					nodePack* s3 = pop(&pstack);
+					nodePack* s1 = pop(&pstack);
+					push(&pstack, makeNode('=', 2, s1, s3));
+				}
+			| equal_expr		 				{ puts("assign <== equal"); }
 			;
 
 
@@ -246,22 +252,19 @@ primary :
 		| VAR									
 			{ 
 				puts("primary <== VAR"); 
-				makeLeaf(typeVAR, &yylval.idx);
-				push(&pstack, makeLeaf(typeVAR, &yylval.dval));
+				push(&pstack, makeLeaf(typeVAR, &yylval.idx));
 				
 			}
 		| INTEGER								
 			{ 
 				puts("primary <== INTEGER"); 
 				cast_flag = 1;
-				makeLeaf(typeINT, &yylval.val);
-				push(&pstack, makeLeaf(typeINT, &yylval.dval));
+				push(&pstack, makeLeaf(typeINT, &yylval.val));
 			}
 		| DOUBLE								
 			{ 
 				puts("primary <== DOUBLE"); 
 				cast_flag = 0;
-				makeLeaf(typeDB, &yylval.val);
 				push(&pstack, makeLeaf(typeDB, &yylval.dval));
 			}
 		;

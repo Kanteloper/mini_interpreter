@@ -56,7 +56,7 @@ typedef struct _node_pack
 typedef struct _sym_node
 {
 	char* sym;
-	nodePack* p;
+	double val;
 } symNode;
 
 nodePack* makeLeaf(typeTag type, void* value);
