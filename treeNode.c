@@ -125,11 +125,12 @@ double ex(nodePack* p)
 				case  NQ :	return ex(p->oprn.op[0]) != ex(p->oprn.op[1]);
 				case PRINT : return ex(p->oprn.op[0]);
 				case WHILE : 
+						puts("while");
 						while(ex(p->oprn.op[0])) 
 						{
-							puts("while");
-							return ex(p->oprn.op[1]);  
+							 ex(p->oprn.op[1]);  
 						}
+						return 0.0;
 				case IF : 
 						if(ex(p->oprn.op[0]))
 						{

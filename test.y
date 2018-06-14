@@ -89,11 +89,17 @@ stmt :
 	 selec_stmt								
 		{
 			puts("stmt <== selec" ); input_flag = 0;
-			printf("%.2f\n", ex(pop(&pstack)));
+			ex(pop(&pstack));
 			puts("YYACCEPT");
 			YYACCEPT;
 		}
-	 | iter_stmt							{ puts("stmt <== iter" ); }
+	 | iter_stmt							
+		{
+			puts("stmt <== iter" ); input_flag = 0;
+			ex(pop(&pstack));
+			puts("YYACCEPT");
+			YYACCEPT;
+		}
 	 | print_stmt							{ puts("stmt <== print" ); }
 	 | expr_stmt							{ puts("stmt <== expr" ); }
 	 ;
@@ -114,7 +120,7 @@ selec_stmt :
 
 
 iter_stmt : 
-		  WHILE '(' expr_stmt ')' stmt_list END				
+		  WHILE '(' expr_stmt ')' stmt_list ';' END				
 			{
 				puts("iter <== WHILE" );	
 				nodePack* s5 = pop(&pstack);
