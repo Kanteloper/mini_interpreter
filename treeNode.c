@@ -95,6 +95,9 @@ double ex(nodePack* p)
 				case '*' :  return ex(p->oprn.op[0]) * ex(p->oprn.op[1]);
 
 			    case '/' :	return ex(p->oprn.op[0]) / ex(p->oprn.op[1]);
+			    
+				case '>' :	return ex(p->oprn.op[0]) > ex(p->oprn.op[1]);
+
 			}
 			break;
 	}
