@@ -149,7 +149,7 @@ double ex(nodePack* p)
 					{ // same
 						if(p->oprn.op[0]->type == typeINT) // int
 						{
-							printf("%d\n", (int)ex(p->oprn.op[0]) * ex(p->oprn.op[1]));
+							printf("%d\n", (int)ex(p->oprn.op[0]) * (int)ex(p->oprn.op[1]));
 						}
 						else // double
 						{
@@ -162,27 +162,17 @@ double ex(nodePack* p)
 					// check type is same
 					if(p->oprn.op[0]->type != p->oprn.op[1]->type) // differ
 					{
-						// find int type 
-						if(p->oprn.op[0]->type == typeINT)
-						{
-							//printf("%.2f\n", 
-								//(double)p->oprn.op[0]->intn.val / p->oprn.op[1]->dbn.dval);
-						}
-						else
-						{
-							//printf("%.2f\n", 
-							//p->oprn.op[0]->dbn.dval / (double)p->oprn.op[1]->intn.val);
-						}
+						printf("%.2f\n", ex(p->oprn.op[0]) / ex(p->oprn.op[1]));
 					}
 					else
 					{ // same
 						if(p->oprn.op[0]->type == typeINT) // int
 						{
-							//printf("%d\n", p->oprn.op[0]->intn.val / p->oprn.op[1]->intn.val);
+							printf("%d\n", (int)ex(p->oprn.op[0]) / (int)ex(p->oprn.op[1]));
 						}
 						else // double
 						{
-							//printf("%.2f\n", p->oprn.op[0]->dbn.dval / p->oprn.op[1]->dbn.dval);
+							printf("%.2f\n", ex(p->oprn.op[0]) / ex(p->oprn.op[1]));
 						}
 					}
 					break;
