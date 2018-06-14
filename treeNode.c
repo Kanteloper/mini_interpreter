@@ -103,6 +103,10 @@ double ex(nodePack* p)
 				case  GQ :	return ex(p->oprn.op[0]) >= ex(p->oprn.op[1]);
 			
 				case  LQ :	return ex(p->oprn.op[0]) <= ex(p->oprn.op[1]);
+				
+				case  EQ :	return ex(p->oprn.op[0]) == ex(p->oprn.op[1]);
+		
+				case  NQ :	return ex(p->oprn.op[0]) != ex(p->oprn.op[1]);
 
 			}
 			break;

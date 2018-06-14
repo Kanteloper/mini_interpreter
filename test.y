@@ -103,8 +103,23 @@ assign_expr :
 
 
 equal_expr : 
-		   equal_expr EQ rel_expr				{ puts("equal <== eq == rel");}
-		   | equal_expr NQ rel_expr				{ puts("equal <== eq != rel"); }
+		   equal_expr EQ rel_expr				
+			{ 
+				puts("equal <== eq == rel");
+				cast_flag = 1;
+				nodePack* s3 = pop(&pstack);
+				nodePack* s1 = pop(&pstack);
+				push(&pstack, makeNode(EQ, 2, s1, s3));
+
+			}
+		   | equal_expr NQ rel_expr				
+			{
+				puts("equal <== eq != rel");
+				cast_flag = 1;
+				nodePack* s3 = pop(&pstack);
+				nodePack* s1 = pop(&pstack);
+				push(&pstack, makeNode(NQ, 2, s1, s3));
+			}
 		   | rel_expr							{ puts("equal <== rel"); }
 		   ;
 
