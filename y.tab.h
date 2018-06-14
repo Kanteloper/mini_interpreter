@@ -59,7 +59,8 @@ extern int yydebug;
     WHILE = 269,
     DEF = 270,
     LOCAL = 271,
-    PRINT = 272
+    PRINT = 272,
+    UMINUS = 273
   };
 #endif
 /* Tokens.  */
@@ -78,6 +79,7 @@ extern int yydebug;
 #define DEF 270
 #define LOCAL 271
 #define PRINT 272
+#define UMINUS 273
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -90,7 +92,7 @@ union YYSTYPE
 	long val;
 	int idx;
 
-#line 94 "y.tab.h" /* yacc.c:1909  */
+#line 96 "y.tab.h" /* yacc.c:1909  */
 };
 
 typedef union YYSTYPE YYSTYPE;

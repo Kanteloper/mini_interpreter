@@ -3,6 +3,7 @@
 #include <stdarg.h>
 
 #include "treeNode.h"
+#include "y.tab.h"
 #include "stack.h"
 
 nodePack* makeLeaf(typeTag type, void* value)
@@ -71,148 +72,132 @@ nodePack* makeNode(int opr, int num, ...)
 	return p;
 }
 
-nodePack* execute(nodePack* p)
+double ex(nodePack* p)
 {
-	if(!p)	return NULL;
-	switch(p->oprn.opr)
+	if(!p)	return 0.0;
+	switch(p->type)
 	{
-		case UMINUS :
-				if(p->oprn.op[0]->type == typeINT) // int
-				{
-					printf("%d\n", -p->oprn.op[0]->intn.val); 
-				}
-				else // double
-				{
-					printf("%.2f\n", -p->oprn.op[0]->dbn.dval); 
-				}
+		case typeINT :	return (double) p->intn.val;
+		case typeDB	 :	return p->dbn.dval;
+		case typeVAR : // 심볼 테이블에 저장된 정수나 실수 값을 리턴하면 된다. 
 			break;
 
-		case '+' :	
-			// check type is same
-			if(p->oprn.op[0]->type != p->oprn.op[1]->type) // differ
+		case typeOpr :
+
+			switch(p->oprn.opr)
 			{
-				// find int type 
-				if(p->oprn.op[0]->type == typeINT)
-				{
-					printf("%.2f\n", 
-					(double)p->oprn.op[0]->intn.val + p->oprn.op[1]->dbn.dval);
-				}
-				else
-				{
-					printf("%.2f\n", 
-					p->oprn.op[0]->dbn.dval + (double)p->oprn.op[1]->intn.val);
-				}
+				case UMINUS :
+					if(p->oprn.op[0]->type == typeINT) // int
+					{
+						printf("%d\n", -p->oprn.op[0]->intn.val); 
 
-			}
-			else
-			{ // same
+
+					}
+					else // double
+					{
+						printf("%.2f\n", -p->oprn.op[0]->dbn.dval); 
+					}
+					break;
+
+				case '+' :	
+					// check type is same
+					if(p->oprn.op[0]->type != p->oprn.op[1]->type) // differ
+					{
+							printf("%.2f\n", ex(p->oprn.op[0]) + ex(p->oprn.op[1]));
+					}
+					else
+					{ // same
 	
-				if(p->oprn.op[0]->type == typeINT) // int
-				{
-					printf("%d\n", p->oprn.op[0]->intn.val + p->oprn.op[1]->intn.val);
-				}
-				else // double
-				{
-					printf("%.2f\n", p->oprn.op[0]->dbn.dval + p->oprn.op[1]->dbn.dval);
-				}
+						if(p->oprn.op[0]->type == typeINT) // int
+						{
+							printf("%d\n", (int)ex(p->oprn.op[0]) + (int)ex(p->oprn.op[1]));
+						}
+						else // double
+						{
+							printf("%.2f\n", ex(p->oprn.op[0]) + ex(p->oprn.op[1]));
+						}
+					}
+					break;
+
+					case '-' :
+					// check type is same
+					if(p->oprn.op[0]->type != p->oprn.op[1]->type) // differ
+					{
+						printf("%.2f\n", ex(p->oprn.op[0]) - ex(p->oprn.op[1]));
+					}
+					else
+					{
+						// same
+						if(p->oprn.op[0]->type == typeINT) // int
+						{
+							printf("%d\n", (int)ex(p->oprn.op[0]) - (int)ex(p->oprn.op[1]));
+						}
+						else // double
+						{
+							printf("%.2f\n", ex(p->oprn.op[0]) - ex(p->oprn.op[1]));
+						}
+					}
+					break;
+
+			   case '*' :
+					// check type is same
+					if(p->oprn.op[0]->type != p->oprn.op[1]->type) // differ
+					{
+						// find int type 
+						if(p->oprn.op[0]->type == typeINT)
+						{
+							//printf("%.2f\n", 
+							//(double)p->oprn.op[0]->intn.val * p->oprn.op[1]->dbn.dval);
+						}
+						else
+						{
+							//printf("%.2f\n", 
+							//p->oprn.op[0]->dbn.dval * (double)p->oprn.op[1]->intn.val);
+						}
+					}
+					else
+					{ // same
+						if(p->oprn.op[0]->type == typeINT) // int
+						{
+							//printf("%d\n", p->oprn.op[0]->intn.val * p->oprn.op[1]->intn.val);
+						}
+						else // double
+						{
+							//printf("%.2f\n", p->oprn.op[0]->dbn.dval * p->oprn.op[1]->dbn.dval);
+						}
+					}
+					break;
+
+			    case '/' :
+					// check type is same
+					if(p->oprn.op[0]->type != p->oprn.op[1]->type) // differ
+					{
+						// find int type 
+						if(p->oprn.op[0]->type == typeINT)
+						{
+							//printf("%.2f\n", 
+								//(double)p->oprn.op[0]->intn.val / p->oprn.op[1]->dbn.dval);
+						}
+						else
+						{
+							//printf("%.2f\n", 
+							//p->oprn.op[0]->dbn.dval / (double)p->oprn.op[1]->intn.val);
+						}
+					}
+					else
+					{ // same
+						if(p->oprn.op[0]->type == typeINT) // int
+						{
+							//printf("%d\n", p->oprn.op[0]->intn.val / p->oprn.op[1]->intn.val);
+						}
+						else // double
+						{
+							//printf("%.2f\n", p->oprn.op[0]->dbn.dval / p->oprn.op[1]->dbn.dval);
+						}
+					}
+					break;
 			}
 			break;
-
-		case '-' :
-			// check type is same
-			if(p->oprn.op[0]->type != p->oprn.op[1]->type) // differ
-			{
-				// find int type 
-				if(p->oprn.op[0]->type == typeINT)
-				{
-					printf("%.2f\n", 
-					(double)p->oprn.op[0]->intn.val - p->oprn.op[1]->dbn.dval);
-				}
-				else
-				{
-					printf("%.2f\n", 
-					p->oprn.op[0]->dbn.dval - (double)p->oprn.op[1]->intn.val);
-				}
-
-			}
-			else
-			{ // same
-	
-				if(p->oprn.op[0]->type == typeINT) // int
-				{
-					printf("%d\n", p->oprn.op[0]->intn.val - p->oprn.op[1]->intn.val);
-				}
-				else // double
-				{
-					printf("%.2f\n", p->oprn.op[0]->dbn.dval - p->oprn.op[1]->dbn.dval);
-				}
-			}
-			break;
-
-	    case '*' :
-			// check type is same
-			if(p->oprn.op[0]->type != p->oprn.op[1]->type) // differ
-			{
-				// find int type 
-				if(p->oprn.op[0]->type == typeINT)
-				{
-					printf("%.2f\n", 
-					(double)p->oprn.op[0]->intn.val * p->oprn.op[1]->dbn.dval);
-				}
-				else
-				{
-					printf("%.2f\n", 
-					p->oprn.op[0]->dbn.dval * (double)p->oprn.op[1]->intn.val);
-				}
-
-			}
-			else
-			{ // same
-	
-				if(p->oprn.op[0]->type == typeINT) // int
-				{
-					printf("%d\n", p->oprn.op[0]->intn.val * p->oprn.op[1]->intn.val);
-				}
-				else // double
-				{
-					printf("%.2f\n", p->oprn.op[0]->dbn.dval * p->oprn.op[1]->dbn.dval);
-				}
-			}
-			break;
-
-	    case '/' :
-			// check type is same
-			if(p->oprn.op[0]->type != p->oprn.op[1]->type) // differ
-			{
-				// find int type 
-				if(p->oprn.op[0]->type == typeINT)
-				{
-					printf("%.2f\n", 
-					(double)p->oprn.op[0]->intn.val / p->oprn.op[1]->dbn.dval);
-				}
-				else
-				{
-					printf("%.2f\n", 
-					p->oprn.op[0]->dbn.dval / (double)p->oprn.op[1]->intn.val);
-				}
-
-			}
-			else
-			{ // same
-	
-				if(p->oprn.op[0]->type == typeINT) // int
-				{
-					printf("%d\n", p->oprn.op[0]->intn.val / p->oprn.op[1]->intn.val);
-				}
-				else // double
-				{
-					printf("%.2f\n", p->oprn.op[0]->dbn.dval / p->oprn.op[1]->dbn.dval);
-				}
-			}
-			break;
-
-			break;
-			
 	}
 }
 

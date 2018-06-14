@@ -25,13 +25,14 @@
 %token EQ NQ
 %token LQ GQ 
 %token IF THEN ELSE END WHILE DEF LOCAL PRINT
+%token UMINUS
 
 %%
 
 program : stmt_list ';' 					
 			{ 
 				puts("YYACCEPT");
-				execute(pop(&pstack));
+				ex(pop(&pstack));
 				idx = 0; 
 				YYACCEPT;
 			}

@@ -11,7 +11,6 @@ typedef enum
 	typeDB, 
 	typeVAR,  
 	typeOpr,
-	UMINUS
 } typeTag;
 
 // node for identifier
@@ -62,7 +61,7 @@ typedef struct _sym_node
 
 nodePack* makeLeaf(typeTag type, void* value);
 nodePack* makeNode(int opr, int num, ...);
-nodePack* execute(nodePack* p);
+double ex(nodePack* p);
 
 #endif
 
