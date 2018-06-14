@@ -53,7 +53,8 @@ program : stmt_list ';'
 						div_flag = 0;
 						YYACCEPT;
 					}
-
+	
+					puts("YYACCEPT");
 					printf("%d\n", result);
 					YYACCEPT;
 				}
@@ -66,11 +67,12 @@ program : stmt_list ';'
 						error_flag = 0;
 						YYACCEPT;
 					}
+					puts("YYACCEPT");
 					printf("%.2f\n", result);
+					YYACCEPT;
 				}
 
 			}
-		|
 		;
 		 
 		 

@@ -115,7 +115,6 @@ double ([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?
 				{	
 					if(!beDuplicated(symTab, yytext)) // not duplicated
 					{
-						
 						symTab[idx]->sym = malloc(sizeof(char) * (strlen(yytext) + 1));
 						strncpy(symTab[idx]->sym, yytext, strlen(yytext));
 						yylval.idx = idx;
@@ -131,5 +130,5 @@ double ([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?
 			}
 [ \t]			;													/* ignore whitespace */
 [;]			{ input_flag = 1; return *yytext; }
-.		   	    yyerror("lexical error : Unknown character"); 		/* lexical error */ 
+.		   	yyerror("lexical error : Unknown character"); 		/* lexical error */ 
 %%
