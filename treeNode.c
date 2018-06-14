@@ -123,6 +123,7 @@ double ex(nodePack* p)
 				case  LQ :	return ex(p->oprn.op[0]) <= ex(p->oprn.op[1]);
 				case  EQ :	return ex(p->oprn.op[0]) == ex(p->oprn.op[1]);
 				case  NQ :	return ex(p->oprn.op[0]) != ex(p->oprn.op[1]);
+				case PRINT : return ex(p->oprn.op[0]);
 			}
 			break;
 	}
@@ -138,6 +139,8 @@ bool beDuplicated(symNode** sym, char* arg)
 			return true;
 		}
 		i++;
+
+		if(sym[i]->sym != NULL) break;
 	}
 	return false;
 }

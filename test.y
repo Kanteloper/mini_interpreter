@@ -106,7 +106,12 @@ iter_stmt :
 
 
 print_stmt : 
-		   PRINT ';'						{ puts("print <== PRINT" ); }
+		   PRINT expr_stmt						
+			{
+				puts("print <== PRINT" ); 
+				nodePack* s2 = pop(&pstack);
+				push(&pstack, makeNode(PRINT, 1, s2));
+			}
 		   ;
 
 
