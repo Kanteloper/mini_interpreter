@@ -977,7 +977,6 @@ YY_RULE_SETUP
 						{
 							// search
 							yylval.idx = searchSym(symTab, yytext);
-							printf("duplicate idx: %d\n", yylval.idx);
 						}
 					}
 					return VAR; 
@@ -985,26 +984,26 @@ YY_RULE_SETUP
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 107 "mini_c.l"
+#line 106 "mini_c.l"
 ;													/* ignore whitespace */
 	YY_BREAK
 case 28:
 /* rule 28 can match eol */
 YY_RULE_SETUP
-#line 108 "mini_c.l"
+#line 107 "mini_c.l"
 { return *yytext; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 109 "mini_c.l"
+#line 108 "mini_c.l"
 yyerror("lexical error : Unknown character"); 		/* lexical error */ 
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 110 "mini_c.l"
+#line 109 "mini_c.l"
 ECHO;
 	YY_BREAK
-#line 1008 "lex.yy.c"
+#line 1007 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2005,7 +2004,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 110 "mini_c.l"
+#line 109 "mini_c.l"
 
 
 

@@ -9,6 +9,7 @@
 	int yylex();
 	int cast_flag = 0;
 	int idx = 0;
+	extern int error_flag;
  
 	symNode* symTab[MAX_SYM]; // symbol table
 	Stack pstack; // parse stack
@@ -33,13 +34,19 @@
 program : stmt_list ';' 					
 			{ 
 				puts("YYACCEPT");
+
 				if( cast_flag != 0 ) // print int
 				{
 					printf("%d\n", (int)ex(pop(&pstack)));
 				}
 				else // print double 
 				{
-					printf("%.2f\n", ex(pop(&pstack)));
+					double result = ex(pop(&pstack));	
+					if(error_flag != 0)
+					{
+						yyerror("syntax error: variable is not defined");	
+						YYACCEPT;
+					}
 				}
 				YYACCEPT;
 			}

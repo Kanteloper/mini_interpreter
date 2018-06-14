@@ -9,6 +9,7 @@
 #include "stack.h"
 
 extern symNode* symTab[MAX_SYM];
+int error_flag = 0;
 
 nodePack* makeLeaf(typeTag type, void* value)
 {
@@ -84,13 +85,15 @@ double ex(nodePack* p)
 		case typeINT :	return (double) p->intn.val;
 		case typeDB	 :	return p->dbn.dval;
 		case typeVAR : 
-						// symbol table search
-					
-						//for(int i = 0; i < 1; i ++ )
-						//{
-							//printf("index %d, sym val = %.2f\n", i, symTab[p->oprn.op[0]->idn.index]->val);
-						//}
-						break;
+				if(symTab[p->idn.index]->val != 0.0)
+				{
+					return symTab[p->idn.index]->val;
+				}
+				else
+				{
+					error_flag = 1;
+					return 0.0;
+				}
 
 		case typeOpr :
 
