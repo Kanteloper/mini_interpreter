@@ -36,41 +36,39 @@
 program : stmt_list ';' 					
 			{
 			
-				input_flag = 1;
+				input_flag = 0;
 				if( cast_flag != 0 ) // print int
 				{
 					int result = (int)ex(pop(&pstack)); 
 					if(error_flag != 0)
 					{
-						yyerror("syntax error: variable is not defined");	
+						yyerror("syntax error 1: variable is not defined");	
 						error_flag = 0;
-						printf("-? ");
-						YYACCEPT;
-					}
-					if(div_flag != 0)
-					{
-						yyerror("syntax error: divide by zero");	
-						error_flag = 0;
-						printf("-? ");
 						YYACCEPT;
 					}
 
-					printf("%d\n", result); printf("-? ");
+					if(div_flag != 0)
+					{
+						yyerror("syntax error: divide by zero");	
+						div_flag = 0;
+						YYACCEPT;
+					}
+
+					printf("%d\n", result);
+					YYACCEPT;
 				}
 				else // print double 
 				{
 					double result = ex(pop(&pstack));	
 					if(error_flag != 0)
 					{
-						yyerror("syntax error: variable is not defined");	
+						yyerror("syntax error 2: variable is not defined");	
 						error_flag = 0;
-						printf("-? ");
 						YYACCEPT;
 					}
-					printf("%.2f\n", result); printf("-? ");
+					printf("%.2f\n", result);
 				}
 
-				YYACCEPT;
 			}
 		|
 		;

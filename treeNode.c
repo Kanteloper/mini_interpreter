@@ -87,11 +87,11 @@ double ex(nodePack* p)
 		case typeINT :	return (double) p->intn.val;
 		case typeDB	 :	return p->dbn.dval;
 		case typeVAR : 
-				if(symTab[p->idn.index]->val != 0.0)
+				if(symTab[p->idn.index]->val != 0.0) // var has value
 				{
 					return symTab[p->idn.index]->val;
 				}
-				else
+				else // var does not have value
 				{
 					error_flag = 1;
 					return 0.0;
@@ -133,13 +133,10 @@ bool beDuplicated(symNode** sym, char* arg)
 	int i = 0;
 	while(sym[i]->sym != NULL)
 	{
-		
 		if(strcmp(sym[i]->sym, arg) == 0)
 		{
 			return true;
 		}
-		else 
-			return false;
 		i++;
 	}
 	return false;

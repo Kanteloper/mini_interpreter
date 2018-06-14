@@ -26,34 +26,40 @@ double ([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?
 
 %%
 
-"if"		{ input_flag = 0; return IF; }
-"then"		{ input_flag = 0; return THEN; }
-"else"		{ input_flag = 0; return ELSE; }
-"end"		{ input_flag = 0; return END; }
-"while"		{ input_flag = 0; return WHILE; }
-"def"		{ input_flag = 0; return DEF; }
-"local"		{ input_flag = 0; return LOCAL; }
-"print"		{ input_flag = 0; return PRINT; }
+"if"		{ input_flag = 1; return IF; }
+"then"		{ input_flag = 1; return THEN; }
+"else"		{ input_flag = 1; return ELSE; }
+"end"		{ input_flag = 1; return END; }
+"while"		{ input_flag = 1; return WHILE; }
+"def"		{ input_flag = 1; return DEF; }
+"local"		{ input_flag = 1; return LOCAL; }
+"print"		{ input_flag = 1; return PRINT; }
 
-"="			{ input_flag = 0; return *yytext; }							/* assign */
-">"			{ input_flag = 0; return *yytext; }							/* relop > */
-"<"			{ input_flag = 0; return *yytext; }							/* relop < */
-"<="		{ input_flag = 0; return LQ; }								/* relop <= */
-">="		{ input_flag = 0; return GQ; }								/* relop >= */
-"=="		{ input_flag = 0; return EQ; }								/* eqlop == */
-"!="		{ input_flag = 0; return NQ; }								/* eqlop != */
-"+"			{ input_flag = 0; return *yytext; }							/* plus */
-"-"			{ input_flag = 0; return *yytext; }							/* minus */
-"*"			{ input_flag = 0; return *yytext; }							/* multi */
-"/"			{ input_flag = 0; return *yytext; }							/* div */
-"("			{ input_flag = 0; return *yytext; }							/* right parenthesis */
-")"			{ input_flag = 0; return *yytext; }							/* left parenthesis */
+"="			{ input_flag = 1; return *yytext; }							/* assign */
+">"			{ input_flag = 1; return *yytext; }							/* relop > */
+"<"			{ input_flag = 1; return *yytext; }							/* relop < */
+"<="		{ input_flag = 1; return LQ; }								/* relop <= */
+">="		{ input_flag = 1; return GQ; }								/* relop >= */
+"=="		{ input_flag = 1; return EQ; }								/* eqlop == */
+"!="		{ input_flag = 1; return NQ; }								/* eqlop != */
+"+"			{ input_flag = 1; return *yytext; }							/* plus */
+"-"			{ input_flag = 1; return *yytext; }							/* minus */
+"*"			{ input_flag = 1; return *yytext; }							/* multi */
+"/"			{ input_flag = 1; return *yytext; }							/* div */
+"("			{ input_flag = 1; return *yytext; }							/* right parenthesis */
+")"			{ input_flag = 1; return *yytext; }							/* left parenthesis */
 "\n"		{  /* enter */ 
-				if(input_flag == 0)  printf("> ");
+				if(input_flag == 0) 
+				{
+					printf("-? ");
+				}
+				else
+					printf("> ");
+				
 			}	
 
 {int}		{	 /* integer */
-				input_flag = 0;
+				input_flag = 1;
 				if(strlen(yytext) > 10) // only 10 size
 				{
 					token = (char*)malloc(sizeof(char) * 11);
@@ -68,7 +74,7 @@ double ([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?
 				return INTEGER; 
 			}	
 {double}	{  /* double */
-				input_flag = 0;
+				input_flag = 1;
 
 				if(strlen(yytext) > 10)
 				{					
@@ -88,7 +94,7 @@ double ([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?
 {under_score}	yyerror("lexical error : Unknown character");  
 
 {id}		{
-				input_flag = 0;
+				input_flag = 1;
 				symTab[idx] = (symNode*)malloc(sizeof(symNode));					
 				if(strlen(yytext) > 16) // over 16 characters
 				{
@@ -109,6 +115,7 @@ double ([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?
 				{	
 					if(!beDuplicated(symTab, yytext)) // not duplicated
 					{
+						
 						symTab[idx]->sym = malloc(sizeof(char) * (strlen(yytext) + 1));
 						strncpy(symTab[idx]->sym, yytext, strlen(yytext));
 						yylval.idx = idx;
@@ -123,6 +130,6 @@ double ([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?
 				return VAR; 
 			}
 [ \t]			;													/* ignore whitespace */
-[;]			{ input_flag = 0; return *yytext; }
+[;]			{ input_flag = 1; return *yytext; }
 .		   	    yyerror("lexical error : Unknown character"); 		/* lexical error */ 
 %%
