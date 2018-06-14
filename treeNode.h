@@ -2,6 +2,7 @@
 #define __TREE_NODE_H
 
 #include <stdarg.h>
+#include <stdbool.h>
 
 #define MAX_SYM 100
 
@@ -62,6 +63,7 @@ typedef struct _sym_node
 nodePack* makeLeaf(typeTag type, void* value);
 nodePack* makeNode(int opr, int num, ...);
 double ex(nodePack* p);
+bool beDuplicated(symNode** sym, char* arg);
 
 #endif
 

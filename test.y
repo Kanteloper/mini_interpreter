@@ -41,7 +41,6 @@ program : stmt_list ';'
 				{
 					printf("%.2f\n", ex(pop(&pstack)));
 				}
-				idx = 0; 
 				YYACCEPT;
 			}
 		| '\n'								{ printf("-? "); YYACCEPT;}

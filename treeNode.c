@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdarg.h>
+#include <string.h>
+#include <stdbool.h>
 
 #include "treeNode.h"
 #include "y.tab.h"
@@ -81,40 +83,50 @@ double ex(nodePack* p)
 	{
 		case typeINT :	return (double) p->intn.val;
 		case typeDB	 :	return p->dbn.dval;
-		case typeVAR :	// 심볼 테이블에 저장된 정수나 실수 값을 리턴하면 된다. 
-			break;
+		case typeVAR : 
+						// symbol table search
+					
+						//for(int i = 0; i < 1; i ++ )
+						//{
+							//printf("index %d, sym val = %.2f\n", i, symTab[p->oprn.op[0]->idn.index]->val);
+						//}
+						break;
 
 		case typeOpr :
 
 			switch(p->oprn.opr)
 			{
 				case UMINUS :	return -ex(p->oprn.op[0]);
-
-				case '=' :  return symTab[p->oprn.op[0]->idn.index]->val = ex(p->oprn.op[1]); 
-
+				case '=' :  return (symTab[p->oprn.op[0]->idn.index]->val) = ex(p->oprn.op[1]); 
 				case '+' :	return ex(p->oprn.op[0]) + ex(p->oprn.op[1]);
-
 				case '-' :  return ex(p->oprn.op[0]) - ex(p->oprn.op[1]);
-
 				case '*' :  return ex(p->oprn.op[0]) * ex(p->oprn.op[1]);
-
 			    case '/' :	return ex(p->oprn.op[0]) / ex(p->oprn.op[1]);
-			    
 				case '>' :	return ex(p->oprn.op[0]) > ex(p->oprn.op[1]);
-
 				case '<' :	return ex(p->oprn.op[0]) < ex(p->oprn.op[1]);
-				
 				case  GQ :	return ex(p->oprn.op[0]) >= ex(p->oprn.op[1]);
-			
 				case  LQ :	return ex(p->oprn.op[0]) <= ex(p->oprn.op[1]);
-				
 				case  EQ :	return ex(p->oprn.op[0]) == ex(p->oprn.op[1]);
-		
 				case  NQ :	return ex(p->oprn.op[0]) != ex(p->oprn.op[1]);
-
 			}
 			break;
 	}
+}
+
+bool beDuplicated(symNode** sym, char* arg)
+{
+	int i = 0;
+	while(sym[i]->sym != NULL)
+	{
+		if(strcmp(sym[i]->sym, arg) == 0)
+		{
+			puts("duplicated");
+			return true;
+		}
+		i++;
+	}
+	puts("not duplicated");
+	return false;
 }
 
 

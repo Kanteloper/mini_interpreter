@@ -4,6 +4,7 @@
 	#include "treeNode.h"
 
 	#include <string.h>
+	#include <stdio.h>
 	#include <stdlib.h>
 
 	void yyerror(char* );
@@ -80,19 +81,18 @@ double ([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?
 {under_score}	yyerror("lexical error : Unknown character");  
 {id}			{
 					symTab[idx] = (symNode*)malloc(sizeof(symNode));					
-
-					if(strlen(yytext) > 16)
+					if(strlen(yytext) > 16) // over 16 characters
 					{
 						symTab[idx]->sym = (char*)malloc(sizeof(char) * 17);
 						strncpy(symTab[idx]->sym, yytext, var_len);
-
 					}
 					else
 					{
+						beDuplicated(symTab, yytext);
 						symTab[idx]->sym = malloc(sizeof(char) * (strlen(yytext) + 1));
 						strncpy(symTab[idx]->sym, yytext, strlen(yytext));
+						printf("idx %d, save: %s\n", idx,  symTab[idx]->sym);
 					}
-
 					yylval.idx = idx;
 					idx++;
 					return VAR; 
