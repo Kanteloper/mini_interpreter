@@ -114,6 +114,7 @@ rel_expr :
 		 rel_expr '>' addsub_expr 				
 			{ 
 				puts("rel <== rel > addsub");
+				cast_flag = 1;
 				nodePack* s3 = pop(&pstack);
 				nodePack* s1 = pop(&pstack);
 				push(&pstack, makeNode('>', 2, s1, s3));
@@ -121,6 +122,7 @@ rel_expr :
 		  |rel_expr '<' addsub_expr				
 			{
 				puts("rel <== rel < addsub");
+				cast_flag = 1;
 				nodePack* s3 = pop(&pstack);
 				nodePack* s1 = pop(&pstack);
 				push(&pstack, makeNode('<', 2, s1, s3));
@@ -129,6 +131,7 @@ rel_expr :
 		 |rel_expr GQ addsub_expr				
 			{ 
 				puts("rel <== rel >= addsub");
+				cast_flag = 1;
 				nodePack* s3 = pop(&pstack);
 				nodePack* s1 = pop(&pstack);
 				push(&pstack, makeNode(GQ, 2, s1, s3));
@@ -136,6 +139,7 @@ rel_expr :
 		 |rel_expr LQ addsub_expr				
 			{ 
 				puts("rel <== rel <= addsub"); 
+				cast_flag = 1;
 				nodePack* s3 = pop(&pstack);
 				nodePack* s1 = pop(&pstack);
 				push(&pstack, makeNode(LQ, 2, s1, s3));
