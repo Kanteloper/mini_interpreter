@@ -7,6 +7,7 @@
 
 	int yyerror(char* msg);
 	int yylex();
+	int cast_flag = 0;
 	int idx = 0;
  
 	symNode* symTab[MAX_SYM]; // symbol table
@@ -32,7 +33,14 @@
 program : stmt_list ';' 					
 			{ 
 				puts("YYACCEPT");
-				ex(pop(&pstack));
+				if( cast_flag != 0 ) // print int
+				{
+					printf("%d\n", (int)ex(pop(&pstack)));
+				}
+				else // print double 
+				{
+					printf("%.2f\n", ex(pop(&pstack)));
+				}
 				idx = 0; 
 				YYACCEPT;
 			}
@@ -201,17 +209,18 @@ primary :
 		| INTEGER								
 			{ 
 				puts("primary <== INTEGER"); 
+				cast_flag = 1;
 				makeLeaf(typeINT, &yylval.val);
 				push(&pstack, makeLeaf(typeINT, &yylval.dval));
 			}
 		| DOUBLE								
 			{ 
 				puts("primary <== DOUBLE"); 
+				cast_flag = 0;
 				makeLeaf(typeDB, &yylval.val);
 				push(&pstack, makeLeaf(typeDB, &yylval.dval));
 			}
 		;
-
 
 %%
 

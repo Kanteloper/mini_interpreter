@@ -79,103 +79,22 @@ double ex(nodePack* p)
 	{
 		case typeINT :	return (double) p->intn.val;
 		case typeDB	 :	return p->dbn.dval;
-		case typeVAR : // 심볼 테이블에 저장된 정수나 실수 값을 리턴하면 된다. 
+		case typeVAR :	// 심볼 테이블에 저장된 정수나 실수 값을 리턴하면 된다. 
 			break;
 
 		case typeOpr :
 
 			switch(p->oprn.opr)
 			{
-				case UMINUS :
-					if(p->oprn.op[0]->type == typeINT) // int
-					{
-						printf("%d\n", -p->oprn.op[0]->intn.val); 
+				case UMINUS :	return -ex(p->oprn.op[0]);
 
+				case '+' :	return ex(p->oprn.op[0]) + ex(p->oprn.op[1]);
 
-					}
-					else // double
-					{
-						printf("%.2f\n", -p->oprn.op[0]->dbn.dval); 
-					}
-					break;
+				case '-' :  return ex(p->oprn.op[0]) - ex(p->oprn.op[1]);
 
-				case '+' :	
-					// check type is same
-					if(p->oprn.op[0]->type != p->oprn.op[1]->type) // differ
-					{
-							printf("%.2f\n", ex(p->oprn.op[0]) + ex(p->oprn.op[1]));
-					}
-					else
-					{ // same
-	
-						if(p->oprn.op[0]->type == typeINT) // int
-						{
-							printf("%d\n", (int)ex(p->oprn.op[0]) + (int)ex(p->oprn.op[1]));
-						}
-						else // double
-						{
-							printf("%.2f\n", ex(p->oprn.op[0]) + ex(p->oprn.op[1]));
-						}
-					}
-					break;
+				case '*' :  return ex(p->oprn.op[0]) * ex(p->oprn.op[1]);
 
-					case '-' :
-					// check type is same
-					if(p->oprn.op[0]->type != p->oprn.op[1]->type) // differ
-					{
-						printf("%.2f\n", ex(p->oprn.op[0]) - ex(p->oprn.op[1]));
-					}
-					else
-					{
-						// same
-						if(p->oprn.op[0]->type == typeINT) // int
-						{
-							printf("%d\n", (int)ex(p->oprn.op[0]) - (int)ex(p->oprn.op[1]));
-						}
-						else // double
-						{
-							printf("%.2f\n", ex(p->oprn.op[0]) - ex(p->oprn.op[1]));
-						}
-					}
-					break;
-
-			   case '*' :
-					// check type is same
-					if(p->oprn.op[0]->type != p->oprn.op[1]->type) // differ
-					{
-						printf("%.2f\n", ex(p->oprn.op[0]) * ex(p->oprn.op[1]));
-					}
-					else
-					{ // same
-						if(p->oprn.op[0]->type == typeINT) // int
-						{
-							printf("%d\n", (int)ex(p->oprn.op[0]) * (int)ex(p->oprn.op[1]));
-						}
-						else // double
-						{
-							printf("%.2f\n", ex(p->oprn.op[0]) * ex(p->oprn.op[1]));
-						}
-					}
-					break;
-
-			    case '/' :
-					// check type is same
-					if(p->oprn.op[0]->type != p->oprn.op[1]->type) // differ
-					{
-						printf("%.2f\n", ex(p->oprn.op[0]) / ex(p->oprn.op[1]));
-					}
-					else
-					{ // same
-						if(p->oprn.op[0]->type == typeINT) // int
-						{
-							printf("%d\n", (int)ex(p->oprn.op[0]) / (int)ex(p->oprn.op[1]));
-						}
-						else // double
-						{
-							printf("%.2f\n", ex(p->oprn.op[0]) / ex(p->oprn.op[1]));
-						}
-					}
-					break;
+			    case '/' :	return ex(p->oprn.op[0]) / ex(p->oprn.op[1]);
 			}
 			break;
 	}
