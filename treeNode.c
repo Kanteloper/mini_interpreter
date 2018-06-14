@@ -129,18 +129,14 @@ double ex(nodePack* p)
 	}
 }
 
-bool beDuplicated(symNode** sym, char* arg)
+bool beDuplicated(symNode** sym, char* arg, int num)
 {
-	int i = 0;
-	while(sym[i]->sym != NULL)
+	for(int i = 0; i < num; i ++)
 	{
 		if(strcmp(sym[i]->sym, arg) == 0)
 		{
 			return true;
 		}
-		i++;
-
-		if(sym[i]->sym != NULL) break;
 	}
 	return false;
 }

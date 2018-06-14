@@ -279,6 +279,7 @@ primary :
 		| VAR									
 			{ 
 				puts("primary <== VAR"); 
+				printf("index: %d\n", yylval.idx);
 				push(&pstack, makeLeaf(typeVAR, &yylval.idx));
 				
 			}

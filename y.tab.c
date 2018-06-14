@@ -483,7 +483,7 @@ static const yytype_uint16 yyrline[] =
        0,    36,    36,    81,    82,    88,    89,    90,    91,    97,
      103,   109,   120,   126,   133,   139,   148,   156,   162,   170,
      179,   187,   195,   201,   208,   215,   221,   228,   243,   249,
-     255,   262,   269,   276,   277,   278,   279,   285,   291
+     255,   262,   269,   276,   277,   278,   279,   286,   292
 };
 #endif
 
@@ -1616,34 +1616,35 @@ yyreduce:
 #line 280 "test.y" /* yacc.c:1646  */
     { 
 				puts("primary <== VAR"); 
+				printf("index: %d\n", yylval.idx);
 				push(&pstack, makeLeaf(typeVAR, &yylval.idx));
 				
 			}
-#line 1623 "y.tab.c" /* yacc.c:1646  */
+#line 1624 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 37:
-#line 286 "test.y" /* yacc.c:1646  */
+#line 287 "test.y" /* yacc.c:1646  */
     { 
 				puts("primary <== INTEGER"); 
 				cast_flag = 1;
 				push(&pstack, makeLeaf(typeINT, &yylval.val));
 			}
-#line 1633 "y.tab.c" /* yacc.c:1646  */
+#line 1634 "y.tab.c" /* yacc.c:1646  */
     break;
 
   case 38:
-#line 292 "test.y" /* yacc.c:1646  */
+#line 293 "test.y" /* yacc.c:1646  */
     { 
 				puts("primary <== DOUBLE"); 
 				cast_flag = 0;
 				push(&pstack, makeLeaf(typeDB, &yylval.dval));
 			}
-#line 1643 "y.tab.c" /* yacc.c:1646  */
+#line 1644 "y.tab.c" /* yacc.c:1646  */
     break;
 
 
-#line 1647 "y.tab.c" /* yacc.c:1646  */
+#line 1648 "y.tab.c" /* yacc.c:1646  */
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
@@ -1871,7 +1872,7 @@ yyreturn:
 #endif
   return yyresult;
 }
-#line 299 "test.y" /* yacc.c:1906  */
+#line 300 "test.y" /* yacc.c:1906  */
 
 
 int yyerror(char* msg)

@@ -63,7 +63,7 @@ typedef struct _sym_node
 nodePack* makeLeaf(typeTag type, void* value);
 nodePack* makeNode(int opr, int num, ...);
 double ex(nodePack* p);
-bool beDuplicated(symNode** sym, char* arg);
+bool beDuplicated(symNode** sym, char* arg, int num);
 int searchSym(symNode** sym, char* arg);
 
 #endif

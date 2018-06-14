@@ -98,7 +98,7 @@ double ([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?
 				symTab[idx] = (symNode*)malloc(sizeof(symNode));					
 				if(strlen(yytext) > 16) // over 16 characters
 				{
-					if(!beDuplicated(symTab, yytext)) // not duplicated
+					if(!beDuplicated(symTab, yytext, idx)) // not duplicated
 					{
 						symTab[idx]->sym = (char*)malloc(sizeof(char) * 17);
 						strncpy(symTab[idx]->sym, yytext, var_len);
@@ -113,7 +113,7 @@ double ([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?
 				}
 				else
 				{	
-					if(!beDuplicated(symTab, yytext)) // not duplicated
+					if(!beDuplicated(symTab, yytext, idx)) // not duplicated
 					{
 						symTab[idx]->sym = malloc(sizeof(char) * (strlen(yytext) + 1));
 						strncpy(symTab[idx]->sym, yytext, strlen(yytext));
