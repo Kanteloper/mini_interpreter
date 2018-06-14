@@ -99,8 +99,8 @@ double ex(nodePack* p)
 
 			switch(p->oprn.opr)
 			{
-				case UMINUS :	return -ex(p->oprn.op[0]);
-				case '=' :  return (symTab[p->oprn.op[0]->idn.index]->val) = ex(p->oprn.op[1]); 
+				case UMINUS : return -ex(p->oprn.op[0]);
+				case '=' :  return symTab[p->oprn.op[0]->idn.index]->val = ex(p->oprn.op[1]); 
 				case '+' :	return ex(p->oprn.op[0]) + ex(p->oprn.op[1]);
 				case '-' :  return ex(p->oprn.op[0]) - ex(p->oprn.op[1]);
 				case '*' :  return ex(p->oprn.op[0]) * ex(p->oprn.op[1]);

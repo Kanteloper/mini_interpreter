@@ -45,8 +45,10 @@ program : stmt_list ';'
 					if(error_flag != 0)
 					{
 						yyerror("syntax error: variable is not defined");	
+						error_flag = 0;
 						YYACCEPT;
 					}
+					printf("%.2f\n", result);
 				}
 				YYACCEPT;
 			}
