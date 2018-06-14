@@ -73,6 +73,7 @@ program : stmt_list ';'
 				}
 
 			}
+		|
 		;
 		 
 		 
@@ -85,7 +86,13 @@ stmt_list :
 
 
 stmt : 
-	 selec_stmt								{ puts("stmt <== selec" ); }
+	 selec_stmt								
+		{
+			puts("stmt <== selec" ); input_flag = 0;
+			printf("%.2f\n", ex(pop(&pstack)));
+			puts("YYACCEPT");
+			YYACCEPT;
+		}
 	 | iter_stmt							{ puts("stmt <== iter" ); }
 	 | print_stmt							{ puts("stmt <== print" ); }
 	 | expr_stmt							{ puts("stmt <== expr" ); }
@@ -94,7 +101,7 @@ stmt :
 
 
 selec_stmt :
-		   IF '(' expr_stmt ')' stmt_list ELSE stmt_list END  
+		   IF '(' expr_stmt ')' stmt_list ';' ELSE stmt_list ';' END  
 			{
 				puts("selec <== IF" );
 				nodePack* s7 = pop(&pstack);
