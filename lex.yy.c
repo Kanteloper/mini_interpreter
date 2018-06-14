@@ -961,13 +961,24 @@ YY_RULE_SETUP
 					symTab[idx] = (symNode*)malloc(sizeof(symNode));					
 					if(strlen(yytext) > 16) // over 16 characters
 					{
-						symTab[idx]->sym = (char*)malloc(sizeof(char) * 17);
-						strncpy(symTab[idx]->sym, yytext, var_len);
+						if(!beDuplicated(symTab, yytext)) // not duplicated
+						{
+							symTab[idx]->sym = (char*)malloc(sizeof(char) * 17);
+							strncpy(symTab[idx]->sym, yytext, var_len);
+							yylval.idx = idx;
+							idx++;
+						}
+						else // duplicated 
+						{
+							// search
+							yylval.idx = searchSym(symTab, yytext);
+						}
 					}
 					else
 					{	
 						if(!beDuplicated(symTab, yytext)) // not duplicated
 						{
+							puts("w2");
 							symTab[idx]->sym = malloc(sizeof(char) * (strlen(yytext) + 1));
 							strncpy(symTab[idx]->sym, yytext, strlen(yytext));
 							yylval.idx = idx;
@@ -984,26 +995,26 @@ YY_RULE_SETUP
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 106 "mini_c.l"
+#line 117 "mini_c.l"
 ;													/* ignore whitespace */
 	YY_BREAK
 case 28:
 /* rule 28 can match eol */
 YY_RULE_SETUP
-#line 107 "mini_c.l"
+#line 118 "mini_c.l"
 { return *yytext; }
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 108 "mini_c.l"
+#line 119 "mini_c.l"
 yyerror("lexical error : Unknown character"); 		/* lexical error */ 
 	YY_BREAK
 case 30:
 YY_RULE_SETUP
-#line 109 "mini_c.l"
+#line 120 "mini_c.l"
 ECHO;
 	YY_BREAK
-#line 1007 "lex.yy.c"
+#line 1018 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -2004,7 +2015,7 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 109 "mini_c.l"
+#line 120 "mini_c.l"
 
 
 

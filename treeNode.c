@@ -104,7 +104,7 @@ double ex(nodePack* p)
 				case '+' :	return ex(p->oprn.op[0]) + ex(p->oprn.op[1]);
 				case '-' :  return ex(p->oprn.op[0]) - ex(p->oprn.op[1]);
 				case '*' :  return ex(p->oprn.op[0]) * ex(p->oprn.op[1]);
-			    case '/' :	return ex(p->oprn.op[0]) / ex(p->oprn.op[1]);
+				case '/' : 	return ex(p->oprn.op[0]) / ex(p->oprn.op[1]);
 				case '>' :	return ex(p->oprn.op[0]) > ex(p->oprn.op[1]);
 				case '<' :	return ex(p->oprn.op[0]) < ex(p->oprn.op[1]);
 				case  GQ :	return ex(p->oprn.op[0]) >= ex(p->oprn.op[1]);
@@ -121,10 +121,13 @@ bool beDuplicated(symNode** sym, char* arg)
 	int i = 0;
 	while(sym[i]->sym != NULL)
 	{
+		
 		if(strcmp(sym[i]->sym, arg) == 0)
 		{
 			return true;
 		}
+		else 
+			return false;
 		i++;
 	}
 	return false;
