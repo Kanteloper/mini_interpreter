@@ -64,6 +64,7 @@ nodePack* makeLeaf(typeTag type, void* value);
 nodePack* makeNode(int opr, int num, ...);
 double ex(nodePack* p);
 bool beDuplicated(symNode** sym, char* arg);
+int searchSym(symNode** sym, char* arg);
 
 #endif
 

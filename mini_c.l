@@ -87,14 +87,20 @@ double ([0-9]*\.?[0-9]+)([eE][-+]?[0-9]+)?
 						strncpy(symTab[idx]->sym, yytext, var_len);
 					}
 					else
-					{
-						beDuplicated(symTab, yytext);
-						symTab[idx]->sym = malloc(sizeof(char) * (strlen(yytext) + 1));
-						strncpy(symTab[idx]->sym, yytext, strlen(yytext));
-						printf("idx %d, save: %s\n", idx,  symTab[idx]->sym);
+					{	
+						if(!beDuplicated(symTab, yytext)) // not duplicated
+						{
+							symTab[idx]->sym = malloc(sizeof(char) * (strlen(yytext) + 1));
+							strncpy(symTab[idx]->sym, yytext, strlen(yytext));
+							yylval.idx = idx;
+							idx++;
+						}
+						else // duplicated 
+						{
+							// search
+							yylval.idx = searchSym(symTab, yytext);
+						}
 					}
-					yylval.idx = idx;
-					idx++;
 					return VAR; 
 				}
 [ \t]			;													/* ignore whitespace */

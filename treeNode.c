@@ -120,13 +120,24 @@ bool beDuplicated(symNode** sym, char* arg)
 	{
 		if(strcmp(sym[i]->sym, arg) == 0)
 		{
-			puts("duplicated");
 			return true;
 		}
 		i++;
 	}
-	puts("not duplicated");
 	return false;
+}
+
+int searchSym(symNode** sym, char* arg)
+{
+	int idx = 0;
+	while(sym[idx]->sym != NULL)
+	{
+		if(strcmp(sym[idx]->sym, arg) == 0)
+		{
+			return idx;
+		}
+		idx++;
+	}
 }
 
 
