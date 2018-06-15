@@ -4,11 +4,11 @@ interpreter: lex.yy.c y.tab.c treeNode.c stack.c
 lex.yy.c : mini_c.l
 	flex mini_c.l
 
-y.tab.c : test.y
-	bison -d -y test.y
+y.tab.c : mini_c2.y
+	bison -d -y mini_c2.y
 
 table :
-	bison -b y -v test.y
+	bison -b y -v mini_c.y
 
 clean : 
 	rm lex.yy.c y.tab.c y.tab.h interpreter *.o

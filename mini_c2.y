@@ -39,10 +39,10 @@ program : stmt_list ';'
 				input_flag = 0;
 				if( cast_flag != 0 ) // print int
 				{
-					int result = (int)ex(pop(&pstack)); 
+					long result = (long)ex(pop(&pstack)); 
 					if(error_flag != 0)
 					{
-						yyerror("syntax error 1: variable is not defined");	
+						yyerror("syntax error : variable is not defined");	
 						error_flag = 0;
 						YYACCEPT;
 					}
@@ -54,8 +54,7 @@ program : stmt_list ';'
 						YYACCEPT;
 					}
 	
-					puts("YYACCEPT");
-					printf("%d\n", result);
+					printf("%ld\n", result);
 					YYACCEPT;
 				}
 				else // print double 
@@ -63,11 +62,10 @@ program : stmt_list ';'
 					double result = ex(pop(&pstack));	
 					if(error_flag != 0)
 					{
-						yyerror("syntax error 2: variable is not defined");	
+						yyerror("syntax error : variable is not defined");	
 						error_flag = 0;
 						YYACCEPT;
 					}
-					puts("YYACCEPT");
 					printf("%.2f\n", result);
 					YYACCEPT;
 				}
@@ -79,8 +77,8 @@ program : stmt_list ';'
 		 
 
 stmt_list : 
-		  stmt_list stmt					{ puts("stmt_list <== stmt_list stmt");} 
-		  | stmt							{ puts("stmt_list <== stmt");}			
+		  stmt_list stmt					 
+		  | stmt										
 		  ;
 
 
@@ -88,20 +86,18 @@ stmt_list :
 stmt : 
 	 selec_stmt								
 		{
-			puts("stmt <== selec" ); input_flag = 0;
+			input_flag = 0;
 			ex(pop(&pstack));
-			puts("YYACCEPT");
 			YYACCEPT;
 		}
 	 | iter_stmt							
 		{
-			puts("stmt <== iter" ); input_flag = 0;
+			input_flag = 0;
 			ex(pop(&pstack));
-			puts("YYACCEPT");
 			YYACCEPT;
 		}
-	 | print_stmt							{ puts("stmt <== print" ); }
-	 | expr_stmt							{ puts("stmt <== expr" ); }
+	 | print_stmt							
+	 | expr_stmt							
 	 ;
 
 
@@ -109,7 +105,6 @@ stmt :
 selec_stmt :
 		   IF '(' expr_stmt ')' stmt_list ';' ELSE stmt_list ';' END  
 			{
-				puts("selec <== IF" );
 				nodePack* s7 = pop(&pstack);
 				nodePack* s5 = pop(&pstack);
 				nodePack* s3 = pop(&pstack);
@@ -122,7 +117,6 @@ selec_stmt :
 iter_stmt : 
 		  WHILE '(' expr_stmt ')' stmt_list ';' END				
 			{
-				puts("iter <== WHILE" );	
 				nodePack* s5 = pop(&pstack);
 				nodePack* s3 = pop(&pstack);
 				push(&pstack, makeNode(WHILE, 2, s3, s5));
@@ -135,7 +129,6 @@ iter_stmt :
 print_stmt : 
 		   PRINT expr_stmt						
 			{
-				puts("print <== PRINT" ); 
 				nodePack* s2 = pop(&pstack);
 				push(&pstack, makeNode(PRINT, 1, s2));
 			}
@@ -144,7 +137,7 @@ print_stmt :
 
 
 expr_stmt : 
-		  assign_expr						{ puts("expr <== assign" ); }
+		  assign_expr						
 		  ;
 
 
@@ -152,12 +145,11 @@ expr_stmt :
 assign_expr : 
 			equal_expr '=' equal_expr					
 				{	
-					puts("assign <== var = equal"); 
 					nodePack* s3 = pop(&pstack);
 					nodePack* s1 = pop(&pstack);
 					push(&pstack, makeNode('=', 2, s1, s3));
 				}
-			| equal_expr		 				{ puts("assign <== equal"); }
+			| equal_expr		 			
 			;
 
 
@@ -165,7 +157,6 @@ assign_expr :
 equal_expr : 
 		   equal_expr EQ rel_expr				
 			{ 
-				puts("equal <== eq == rel");
 				cast_flag = 1;
 				nodePack* s3 = pop(&pstack);
 				nodePack* s1 = pop(&pstack);
@@ -174,13 +165,12 @@ equal_expr :
 			}
 		   | equal_expr NQ rel_expr				
 			{
-				puts("equal <== eq != rel");
 				cast_flag = 1;
 				nodePack* s3 = pop(&pstack);
 				nodePack* s1 = pop(&pstack);
 				push(&pstack, makeNode(NQ, 2, s1, s3));
 			}
-		   | rel_expr							{ puts("equal <== rel"); }
+		   | rel_expr							
 		   ;
 
 
@@ -188,7 +178,6 @@ equal_expr :
 rel_expr : 
 		 rel_expr '>' addsub_expr 				
 			{ 
-				puts("rel <== rel > addsub");
 				cast_flag = 1;
 				nodePack* s3 = pop(&pstack);
 				nodePack* s1 = pop(&pstack);
@@ -196,7 +185,6 @@ rel_expr :
 			}
 		  |rel_expr '<' addsub_expr				
 			{
-				puts("rel <== rel < addsub");
 				cast_flag = 1;
 				nodePack* s3 = pop(&pstack);
 				nodePack* s1 = pop(&pstack);
@@ -205,7 +193,6 @@ rel_expr :
 		    }
 		 |rel_expr GQ addsub_expr				
 			{ 
-				puts("rel <== rel >= addsub");
 				cast_flag = 1;
 				nodePack* s3 = pop(&pstack);
 				nodePack* s1 = pop(&pstack);
@@ -213,13 +200,12 @@ rel_expr :
 			}
 		 |rel_expr LQ addsub_expr				
 			{ 
-				puts("rel <== rel <= addsub"); 
 				cast_flag = 1;
 				nodePack* s3 = pop(&pstack);
 				nodePack* s1 = pop(&pstack);
 				push(&pstack, makeNode(LQ, 2, s1, s3));
 			}
-		 | addsub_expr							{ puts("rel <== addsub"); }
+		 | addsub_expr							
 		 ;
 
 
@@ -227,19 +213,17 @@ rel_expr :
 addsub_expr :
 			addsub_expr '+' muldiv_expr			
 				{
-					puts("addsub <== addsub + muldiv");
 					nodePack* s3 = pop(&pstack);
 					nodePack* s1 = pop(&pstack);
 					push(&pstack, makeNode('+', 2, s1, s3));
 				}
 			|addsub_expr '-' muldiv_expr		
 				{ 
-					puts("addsub <== addsub - muldiv");
 					nodePack* s3 = pop(&pstack);
 					nodePack* s1 = pop(&pstack);
 					push(&pstack, makeNode('-', 2, s1, s3));
 				}
-			| muldiv_expr						{ puts("addsub <== muldiv"); }
+			| muldiv_expr						
 			;
 
 
@@ -247,14 +231,12 @@ addsub_expr :
 muldiv_expr :
 			muldiv_expr '*' cast				
 				{
-					puts("muldiv <== muldiv * cast");
 					nodePack* s3 = pop(&pstack);
 					nodePack* s1 = pop(&pstack);
 					push(&pstack, makeNode('*', 2, s1, s3));
 				}
 			| muldiv_expr '/' cast				
 				{ 
-					puts("muldiv <== muldiv / cast");
 					nodePack* s3 = pop(&pstack);
 					nodePack* s1 = pop(&pstack);
 					if(s3->dbn.dval == 0.0 || s3->intn.val == 0)
@@ -267,7 +249,7 @@ muldiv_expr :
 						push(&pstack, makeNode('/', 2, s1, s3));
 					}
 				}
-			| cast								{ puts("muldiv <== cast"); }
+			| cast							
 			;
 
 
@@ -275,11 +257,10 @@ muldiv_expr :
 cast :
 	  unary_expr									
 		{ 
-			puts("cast <== unary_expr");
 			nodePack* s1 = pop(&pstack);
 			push(&pstack, makeNode(UMINUS, 1, s1));
 		}
-	 | primary									{ puts("cast <== primary"); }
+	 | primary									
 	 ;
 
 
@@ -293,31 +274,28 @@ unary_op :
 
 
 unary_expr :
-		   unary_op cast						{ puts("unary_expr <== unary_op cast"); }
+		   unary_op cast						
 		   ;
 
 
 
 
 primary :
-		VAR '(' stmt_list ')'					{ puts("primary <== ( stmt list )"); }
-		| VAR '(' ')'							{ puts("primary <== var ()"); }
-		| '(' expr_stmt ')'						{ puts("primary <== ( expr )"); }
+		VAR '(' stmt_list ')'					
+		| VAR '(' ')'							
+		| '(' expr_stmt ')'					
 		| VAR									
 			{ 
-				puts("primary <== VAR"); 
 				push(&pstack, makeLeaf(typeVAR, &yylval.idx));
 				
 			}
 		| INTEGER								
 			{ 
-				puts("primary <== INTEGER"); 
 				cast_flag = 1;
 				push(&pstack, makeLeaf(typeINT, &yylval.val));
 			}
 		| DOUBLE								
 			{ 
-				puts("primary <== DOUBLE"); 
 				cast_flag = 0;
 				push(&pstack, makeLeaf(typeDB, &yylval.dval));
 			}

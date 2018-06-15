@@ -24,7 +24,7 @@ nodePack* makeLeaf(typeTag type, void* value)
 				exit(0);
 			}
 			p->type = type;
-			p->intn.val = *(int *)value;
+			p->intn.val = *(long *)value;
 			return p;
 
 		case typeDB:

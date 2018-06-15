@@ -23,7 +23,7 @@ typedef struct _id_node
 // node for integer
 typedef struct _int_node
 {
-	int val; // size of number 10
+	long val; // size of number 10
 } intNode;
 
 // node for double
